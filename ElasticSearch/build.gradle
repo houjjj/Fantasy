@@ -1,0 +1,13 @@
+//bootJar {
+//    enabled = true
+//}
+dependencies {
+// https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch
+    implementation group: 'org.elasticsearch', name: 'elasticsearch', version: '7.15.0'
+// https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-high-level-client
+    implementation group: 'org.elasticsearch.client', name: 'elasticsearch-rest-high-level-client', version: '7.15.0'
+//    implementation 'org.springframework.boot:spring-boot-starter:2.6.1'
+}
+task prepareKotlinBuildScriptModel {
+
+}
