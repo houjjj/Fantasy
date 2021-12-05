@@ -22,10 +22,17 @@ allprojects {
     bootJar {
         enabled = false
     }
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
 }
 // 子模块统一配置
 subprojects {
     dependencies {
+        compileOnly 'org.projectlombok:lombok:1.18.4'
+        annotationProcessor 'org.projectlombok:lombok:1.18.4'
+        testCompileOnly 'org.projectlombok:lombok:1.18.4'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.4'
         implementation 'org.springframework.boot:spring-boot-starter:2.6.1'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
