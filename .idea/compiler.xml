@@ -15,9 +15,11 @@
         <module name="Fantasy.Log-Demo.Log4j.main" />
         <module name="Fantasy.ElasticSearch.test" />
         <module name="Fantasy.Log-Demo.test" />
+        <module name="Fantasy.JWT.test" />
         <module name="Fantasy.Log-Demo.JCL.test" />
         <module name="Fantasy.Log-Demo.Slf4j.main" />
         <module name="Fantasy.ElasticSearch.main" />
+        <module name="Fantasy.JWT.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11">
