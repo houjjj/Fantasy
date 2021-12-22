@@ -1,3 +1,6 @@
 rootProject.name = 'Fantasy'
 include 'ElasticSearch'
+include 'Log-Demo:Log4j'
+include 'Log-Demo:JCL'
+include 'Log-Demo:Slf4j'
 

@@ -4,6 +4,8 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <option name="delegatedBuild" value="true" />
+        <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleHome" value="$PROJECT_DIR$/../../2021DEV/gradle-6.8.1" />
@@ -11,6 +13,27 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/ElasticSearch" />
+            <option value="$PROJECT_DIR$/Log-Demo" />
+            <option value="$PROJECT_DIR$/Log-Demo/JCL" />
+            <option value="$PROJECT_DIR$/Log-Demo/Log4j" />
+            <option value="$PROJECT_DIR$/Log-Demo/Slf4j" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="delegatedBuild" value="true" />
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Log-Demo/Slf4j" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../2021DEV/gradle-6.8.1" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/ElasticSearch" />
+            <option value="$PROJECT_DIR$/Log-Demo" />
+            <option value="$PROJECT_DIR$/Log-Demo/JCL" />
+            <option value="$PROJECT_DIR$/Log-Demo/Log4j" />
+            <option value="$PROJECT_DIR$/Log-Demo/Slf4j" />
           </set>
         </option>
       </GradleProjectSettings>

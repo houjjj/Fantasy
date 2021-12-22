@@ -8,11 +8,22 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.4/7103ab519b1cdbb0642ad4eaf1db209d905d0f96/lombok-1.18.4.jar" />
         </processorPath>
+        <module name="Fantasy.Log-Demo.main" />
+        <module name="Fantasy.Log-Demo.Log4j.test" />
+        <module name="Fantasy.Log-Demo.Slf4j.test" />
+        <module name="Fantasy.Log-Demo.JCL.main" />
+        <module name="Fantasy.Log-Demo.Log4j.main" />
         <module name="Fantasy.ElasticSearch.test" />
+        <module name="Fantasy.Log-Demo.test" />
+        <module name="Fantasy.Log-Demo.JCL.test" />
+        <module name="Fantasy.Log-Demo.Slf4j.main" />
         <module name="Fantasy.ElasticSearch.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11">
+      <module name="Slf4j" target="1.8" />
+      <module name="Slf4j.main" target="1.8" />
+      <module name="Slf4j.test" target="1.8" />
       <module name="Stream" target="8" />
     </bytecodeTargetLevel>
   </component>

@@ -1,5 +1,6 @@
 package com.hou.stream.predicate;
 
+import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +17,6 @@ public class Main {
         System.out.println(filterEmployees(employees,isAdultMale()));
         System.out.println(filterEmployees(employees,isAdultFemale()));
         System.out.println(filterEmployees(employees,isAgeMoreThan(20)));
-
     }
 
     private static List<Employee> getEmployees() {
