@@ -9,20 +9,24 @@
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.4/7103ab519b1cdbb0642ad4eaf1db209d905d0f96/lombok-1.18.4.jar" />
         </processorPath>
         <module name="Fantasy.Log-Demo.main" />
+        <module name="Fantasy.Mybatis.test" />
+        <module name="Fantasy.Log-Demo.Log4j.main" />
+        <module name="Fantasy.JWT.test" />
+        <module name="Fantasy.JWT.main" />
+        <module name="Fantasy.Mybatis.main" />
+        <module name="Fantasy.Stream.test" />
         <module name="Fantasy.Log-Demo.Log4j.test" />
         <module name="Fantasy.Log-Demo.Slf4j.test" />
         <module name="Fantasy.Log-Demo.JCL.main" />
-        <module name="Fantasy.Log-Demo.Log4j.main" />
+        <module name="Fantasy.Stream.main" />
         <module name="Fantasy.ElasticSearch.test" />
         <module name="Fantasy.Log-Demo.test" />
-        <module name="Fantasy.JWT.test" />
         <module name="Fantasy.Log-Demo.JCL.test" />
         <module name="Fantasy.Log-Demo.Slf4j.main" />
         <module name="Fantasy.ElasticSearch.main" />
-        <module name="Fantasy.JWT.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="11">
+    <bytecodeTargetLevel target="1.8">
       <module name="Slf4j" target="1.8" />
       <module name="Slf4j.main" target="1.8" />
       <module name="Slf4j.test" target="1.8" />

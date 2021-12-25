@@ -4,4 +4,6 @@ include 'Log-Demo:Log4j'
 include 'Log-Demo:JCL'
 include 'Log-Demo:Slf4j'
 include 'JWT'
+include 'Stream'
+include 'Mybatis'
 
