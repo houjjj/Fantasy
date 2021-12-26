@@ -17,8 +17,8 @@ dependencies {
 
 }
 task cleanBuildDir(type: Delete) {
-    delete "${projectDir}/build"
-    delete "${projectDir}/out"
+    delete "${projectDir}/Mybatis/build"
+    delete "${projectDir}/Mybatis/out"
 }
 test {
     useJUnitPlatform()

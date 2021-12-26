@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	
+
 	<settings>
 		<setting name="cacheEnabled"             value="true" />  <!-- 全局映射器启用缓存 -->
 		<setting name="useGeneratedKeys"         value="true" />  <!-- 允许 JDBC 支持自动生成主键 -->
@@ -23,8 +23,12 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		</environment>
 	</environments>
 	<mappers>
-<!--		<mapper resource="mapper/HRMapper.xml"/>-->
+		<mapper resource="mapper/HRMapper.xml"/>
 <!--		<mapper resource="com/houjun/mybatis/mapper/HRMapper.xml"/>-->
-		<package name="com.houjun.mybatis.mapper"/>
+
+		<!-- 使用包方式，约定映射文件和接口在同一个目录下-->
+<!--		<package name="com.houjun.mybatis.mapper"/>-->
+		<!-- 使用指定接口，约定映射文件和接口在同一个目录下-->
+<!--		<mapper class="com.houjun.mybatis.mapper.HRMapper"/>-->
 	</mappers>
 </configuration>

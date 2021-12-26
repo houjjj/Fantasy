@@ -1,0 +1,6 @@
+com/houjun/mybatis/mapper/HRMapper.java
+ com.houjun.mybatis.mapper.HRMapper
+com/houjun/mybatis/ExecutorTest.java
+ com.houjun.mybatis.ExecutorTest
+com/houjun/mybatis/HR.java
+ com.houjun.mybatis.HR

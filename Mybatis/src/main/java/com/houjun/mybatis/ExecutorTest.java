@@ -1,5 +1,6 @@
 package com.houjun.mybatis;
 
+import com.houjun.mybatis.mapper.HRMapper;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -8,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
-import java.util.List;
 
 /**
  * @author HouJun
@@ -26,9 +26,19 @@ public class ExecutorTest {
     }
 
     @Test
-    public void simpleExecutorTest(){
+    public void simpleExecutorTest() {
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        HR o = sqlSession.selectOne("com.houjun.mybatis.mapper.HRMapper.selectById",10);
-        System.out.println(o);
+        HR o = sqlSession.selectOne("com.houjun.mybatis.mapper.HRMapper.selectById", 10);
+        HRMapper mapper = sqlSession.getMapper(HRMapper.class);
+        HR o1 = mapper.selectById(10);
+        System.out.println(o == o1);
+    }
+
+    @Test
+    public void mapperTest() {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        HRMapper mapper = sqlSession.getMapper(HRMapper.class);
+        HR o1 = mapper.selectById(10);
+        System.out.println(o1);
     }
 }
