@@ -14,6 +14,8 @@ dependencies {
     implementation 'org.mybatis:mybatis:3.5.8'
 // https://mvnrepository.com/artifact/mysql/mysql-connector-java
     implementation 'mysql:mysql-connector-java:8.0.27'
+// https://mvnrepository.com/artifact/org.mybatis/mybatis-spring
+    implementation 'org.mybatis:mybatis-spring:2.0.6'
 
 }
 task cleanBuildDir(type: Delete) {

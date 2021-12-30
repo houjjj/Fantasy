@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- <setting name="mapUnderscoreToCamelCase" value="true"/>  驼峰式命名 -->
 	</settings>
 	<typeAliases>
-		<typeAlias type="com.houjun.mybatis.HR" alias="hr"/>
+		<typeAlias type="com.houjun.mybatis.domain.HR" alias="hr"/>
 <!--		<package name="com.houjun.mybatis"/>-->
 	</typeAliases>
 	<environments default="dev">
@@ -33,11 +33,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</environments>
 
 	<mappers>
-		<mapper resource="mapper/HRMapper.xml"/>
-<!--		<mapper resource="com/houjun/mybatis/mapper/HRMapper.xml"/>-->
+<!--		<mapper resource="mapper/HRMapper1.xml"/>-->
+<!--		<mapper resource="com/houjun/mybatis/mapper/HRMapper1.xml"/>-->
 
 		<!-- 使用包方式，约定映射文件和接口在同一个目录下-->
-<!--		<package name="com.houjun.mybatis.mapper"/>-->
+		<package name="com.houjun.mybatis.mapper"/>
 		<!-- 使用指定接口，约定映射文件和接口在同一个目录下-->
 <!--		<mapper class="com.houjun.mybatis.mapper.HRMapper"/>-->
 	</mappers>
