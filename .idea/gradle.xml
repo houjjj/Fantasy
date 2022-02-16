@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/ElasticSearch" />
             <option value="$PROJECT_DIR$/JWT" />
+            <option value="$PROJECT_DIR$/Kafka" />
             <option value="$PROJECT_DIR$/Log-Demo" />
             <option value="$PROJECT_DIR$/Log-Demo/JCL" />
             <option value="$PROJECT_DIR$/Log-Demo/Log4j" />

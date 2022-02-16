@@ -20,8 +20,10 @@
         <module name="Fantasy.Log-Demo.JCL.main" />
         <module name="Fantasy.Stream.main" />
         <module name="Fantasy.ElasticSearch.test" />
+        <module name="Fantasy.Kafka.test" />
         <module name="Fantasy.Log-Demo.test" />
         <module name="Fantasy.Log-Demo.JCL.test" />
+        <module name="Fantasy.Kafka.main" />
         <module name="Fantasy.Log-Demo.Slf4j.main" />
         <module name="Fantasy.ElasticSearch.main" />
       </profile>
