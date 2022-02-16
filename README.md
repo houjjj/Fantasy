@@ -1,4 +1,4 @@
-# Fantasy 范特西
+# Fantasy 范特西t
 使用Gradle 构建，各种新技术的试验田，每个子模块都是独立的技术栈
 
 1. ElasticSearch
