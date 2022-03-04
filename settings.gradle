@@ -7,4 +7,5 @@ include 'JWT'
 include 'Stream'
 include 'Mybatis'
 include 'Kafka'
+include 'RocketMQ'
 

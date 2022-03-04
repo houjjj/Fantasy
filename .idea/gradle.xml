@@ -20,6 +20,7 @@
             <option value="$PROJECT_DIR$/Log-Demo/Log4j" />
             <option value="$PROJECT_DIR$/Log-Demo/Slf4j" />
             <option value="$PROJECT_DIR$/Mybatis" />
+            <option value="$PROJECT_DIR$/RocketMQ" />
             <option value="$PROJECT_DIR$/Stream" />
           </set>
         </option>
