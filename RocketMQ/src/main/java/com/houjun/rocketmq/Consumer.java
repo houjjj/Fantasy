@@ -7,6 +7,7 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.message.MessageExt;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class Consumer {
@@ -14,7 +15,7 @@ public class Consumer {
 	public static void main(String[] args) throws InterruptedException, MQClientException {
 
     	// 实例化消费者
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("please_rename_unique_group_name");
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("houjun");
 
     	// 设置NameServer的地址
         consumer.setNamesrvAddr("172.28.95.17:9876");
@@ -26,6 +27,9 @@ public class Consumer {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
                 System.out.printf("%s Receive New Messages: %s %n", Thread.currentThread().getName(), msgs);
+                for (MessageExt msg : msgs) {
+                    System.out.println(new String(msg.getBody(), StandardCharsets.UTF_8));
+                }
                 // 标记该消息已经被成功消费
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
