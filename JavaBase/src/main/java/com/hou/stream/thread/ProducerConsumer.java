@@ -1,14 +1,17 @@
 package com.hou.stream.thread;
 
+import lombok.SneakyThrows;
+
 import java.util.UUID;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * 生产者消费者模型
+ * 要求，生产一个消费一个
  */
 public class ProducerConsumer {
     public static void main(String[] args) {
-        ArrayBlockingQueue<String> queue = new ArrayBlockingQueue<>(10);
+        ArrayBlockingQueue<String> queue = new ArrayBlockingQueue<>(1);
         Thread producer = new Thread(new Producer(queue));
         Thread consumer = new Thread(new Consumer(queue));
         producer.start();
@@ -21,11 +24,19 @@ public class ProducerConsumer {
         public Producer(ArrayBlockingQueue<String> queue) {
             this.queue = queue;
         }
+
+        @SneakyThrows
         @Override
         public void run() {
-            while (true) {
+            for (int i = 0; ; i++) {
                 synchronized (queue) {
-                queue.add(UUID.randomUUID().toString());
+                    // 唤醒在当前 锁对象上等待的线程
+                    queue.notify();
+                    String uuid = UUID.randomUUID().toString();
+                    queue.add(uuid);
+                    System.out.println("生产：" + uuid);
+                    // 当前线程休眠并放弃锁
+                    queue.wait();
                 }
             }
         }
@@ -38,11 +49,14 @@ public class ProducerConsumer {
             this.queue = queue;
         }
 
+        @SneakyThrows
         @Override
         public void run() {
-            while (true) {
+            for (int i = 0; ; i++) {
                 synchronized (queue) {
-                    System.out.println(queue.poll());
+                    queue.notify();
+                    System.out.println("消费：" + queue.poll());
+                    queue.wait();
                 }
             }
         }
