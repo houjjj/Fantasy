@@ -7,17 +7,31 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ElasticSearch" />
+        <module name="Fantasy.ElasticSearch" />
         <module name="Log-Demo" />
         <module name="JWT" />
         <module name="Kafka" />
-        <module name="Stream" />
         <module name="SpringBoot" />
+        <module name="RocketMQ" />
+        <module name="ElasticSearch" />
+        <module name="JavaBase" />
+        <module name="Fantasy.RocketMQ" />
+        <module name="Fantasy.Kafka" />
+        <module name="Fantasy.JWT" />
         <module name="ThreadPool-spring-boot-starterr" />
         <module name="Mybatis" />
-        <module name="RocketMQ" />
+        <module name="Fantasy.Mybatis" />
+        <module name="Fantasy.Log-Demo" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8" />
+    <bytecodeTargetLevel target="8">
+      <module name="ElasticSearch" target="1.5" />
+      <module name="Fantasy.JavaBase" target="1.5" />
+      <module name="JWT" target="1.5" />
+      <module name="Kafka" target="1.5" />
+      <module name="Log-Demo" target="1.5" />
+      <module name="Mybatis" target="1.5" />
+      <module name="RocketMQ" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

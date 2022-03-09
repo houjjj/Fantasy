@@ -10,7 +10,7 @@
     <module>ElasticSearch</module>
     <module>Log-Demo</module>
     <module>JWT</module>
-    <module>Stream</module>
+    <module>JavaBase</module>
     <module>Mybatis</module>
     <module>Kafka</module>
     <module>RocketMQ</module>
@@ -18,14 +18,12 @@
     <module>SpringBoot</module>
   </modules>
   <dependencies>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
       <version>2.6.1</version>
       <scope>runtime</scope>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
