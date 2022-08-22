@@ -16,6 +16,7 @@
     <module>RocketMQ</module>
     <module>ThreadPool-spring-boot-starterr</module>
     <module>SpringBoot</module>
+    <module>Quartz</module>
   </modules>
   <dependencies>
     <dependency>
