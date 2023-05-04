@@ -10,12 +10,12 @@ import java.util.concurrent.ThreadPoolExecutor;
 @RequestMapping("/hello")
 public class HelloController {
 
-    @Autowired
-    private ThreadPoolExecutor poolExecutor;
-
-    @RequestMapping
-    public void hello(){
-//        NamedThreadFactory namedThreadFactory = new NamedThreadFactory();
-        System.out.println(poolExecutor.getPoolSize());
-    }
+//    @Autowired
+//    private ThreadPoolExecutor poolExecutor;
+//
+//    @RequestMapping
+//    public void hello(){
+////        NamedThreadFactory namedThreadFactory = new NamedThreadFactory();
+//        System.out.println(poolExecutor.getPoolSize());
+//    }
 }

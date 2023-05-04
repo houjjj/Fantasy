@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: redisson
+
+management:
+  health:
+    redis:
+      enabled: false
