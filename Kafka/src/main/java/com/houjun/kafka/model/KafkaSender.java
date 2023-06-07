@@ -30,7 +30,7 @@ public class KafkaSender {
         message.setSendTime(new Date());
         log.info("【++++++++++++++++++ message ：{}】", gson.toJson(message));
         //对 topic =  hello2 的发送消息
-        kafkaTemplate.send("hello2",gson.toJson(message));
+        kafkaTemplate.send("hello", gson.toJson(message));
     }
 
 }

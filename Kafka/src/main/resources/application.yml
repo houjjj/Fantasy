@@ -1,6 +1,6 @@
 spring:
   kafka:
-    bootstrap-servers: localhost:9092  #bootstrap-servers：连接kafka的地址，多个地址用逗号分隔
+    bootstrap-servers: 192.102.20.143:32561,192.102.20.143:32562,192.102.20.143:32563  #bootstrap-servers：连接kafka的地址，多个地址用逗号分隔
     consumer:
       group-id: myGroup
       enable-auto-commit: true

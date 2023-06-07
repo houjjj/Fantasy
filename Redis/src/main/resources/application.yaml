@@ -1,0 +1,10 @@
+spring:
+  redis:
+    lettuce:
+      cluster:
+        refresh:
+          period:
+management:
+  health:
+    redis:
+      enabled: false

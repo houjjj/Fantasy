@@ -17,7 +17,14 @@ public class KafkaController {
 
 
     @GetMapping("sendMessage/{msg}")
-    public void sendMessage(@PathVariable("msg") String msg){
+    public void sendMessage(@PathVariable("msg") String msg) {
+        for (int i = 0; i < 10000; i++) {
+            kafkaSender.send(msg + i);
+        }
+    }
+
+    @GetMapping("consumer/{msg}")
+    public void consumer(@PathVariable("msg") String msg) {
         kafkaSender.send(msg);
     }
 }

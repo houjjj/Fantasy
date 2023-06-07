@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: redisson
+
+management:
+  health:
+    redis:
+      enabled: false
+server:
+  port: 8081

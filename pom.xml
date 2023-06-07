@@ -11,7 +11,7 @@
         <module>ElasticSearch</module>
         <module>Log-Demo</module>
         <module>JWT</module>
-        <module>Java</module>
+        <module>JavaSE</module>
         <module>Mybatis</module>
         <module>Kafka</module>
         <module>RocketMQ</module>
@@ -20,7 +20,7 @@
         <module>Quartz</module>
         <module>Redis</module>
         <module>MongoDB</module>
-        <module>redisson</module>
+        <module>Redisson</module>
     </modules>
     <dependencies>
         <dependency>
