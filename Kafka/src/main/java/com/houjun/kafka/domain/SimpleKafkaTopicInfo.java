@@ -1,4 +1,4 @@
-package com.houjun.kafka.controller.domain;
+package com.houjun.kafka.domain;
 
 import lombok.Data;
 

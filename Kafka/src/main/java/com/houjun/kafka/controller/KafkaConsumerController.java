@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 
 // Class
-public class KafkaConsumer {
+public class KafkaConsumerController {
 
     @KafkaListener(topics = "hello", groupId = "myGroup")
     public void consume(String message) {

@@ -2,7 +2,7 @@ package com.houjun.kafka.model;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.houjun.kafka.model.Message;
+import com.houjun.kafka.domain.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;

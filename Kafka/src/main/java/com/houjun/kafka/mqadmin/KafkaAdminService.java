@@ -1,9 +1,12 @@
-package com.houjun.kafka.controller.mqadmin;
+package com.houjun.kafka.mqadmin;
 
-import com.houjun.kafka.controller.domain.KafkaTopicDetail;
-import com.houjun.kafka.controller.domain.SimpleKafkaTopicInfo;
+import com.houjun.kafka.domain.KafkaTopicDetail;
+import com.houjun.kafka.domain.SimpleKafkaTopicInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.admin.*;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.config.ConfigResource;
 import org.apache.kafka.common.config.SaslConfigs;
 import org.apache.kafka.common.config.TopicConfig;
@@ -152,21 +155,40 @@ public class KafkaAdminService {
     public static AdminClient getClient(String brokers, String username, String password) {
 
         if (!BROKER_PATTERN.matcher(brokers).matches()) {
-//            throw new CustomException(600, "broker 列表是不是逗号分隔的 ip:port 格式？");
+//            throw new Runn(600, "broker 列表是不是逗号分隔的 ip:port 格式？");
         }
-        String jaasTemplate = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"%s\" password=\"%s\";";
+        String jaasTemplate = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"houjun\" password=\"Admin123\";";
         String jaasCfg = String.format(jaasTemplate, username, password);
 
         Map<String, Object> props = new HashMap<>();
         props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, brokers);
-        props.put(AdminClientConfig.REQUEST_TIMEOUT_MS_CONFIG, "10000");
+        props.put(AdminClientConfig.REQUEST_TIMEOUT_MS_CONFIG, "300000");
         if (!StringUtils.isEmpty(username)) {
             log.info("[getClient] username:{} ", username);
-            props.put("security.protocol", SecurityProtocol.PLAINTEXT.name);
+//            props.put(ProducerConfig.MAX_BLOCK_MS_CONFIG, "30000");
+//            props.put(ProducerConfig.TRANSACTION_TIMEOUT_CONFIG, "5000");
+//            props.put(ProducerConfig.RETRIES_CONFIG, 5);
+//            props.put("jaas.enabled", true);
+//            props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
+//            props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
+//
+//            props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+//            props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+
+//            props.put("acks", "all");
+//            props.put("retries", 0);
+//            props.put("batch.size", 16384);
+//            props.put("linger.ms", 10);
+//            props.put("buffer.memory", 335544320);
+
+            props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");
             props.put(SaslConfigs.SASL_MECHANISM, "PLAIN");
             props.put(SaslConfigs.SASL_JAAS_CONFIG, jaasCfg);
-            props.put("max.block.ms", "5000");
-            props.put("transaction.timeout.ms", "5000");
+
+//            System.setProperty("java.security.auth.login.config", "D:/kafka_client_jaas.conf"); //配置文件路径
+//            props.put("security.protocol", "SASL_PLAINTEXT");
+//            props.put("sasl.mechanism", "PLAIN");
+
         }
         try {
             AdminClient client = AdminClient.create(props);
