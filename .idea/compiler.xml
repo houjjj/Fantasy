@@ -36,7 +36,7 @@
       <module name="Quartz" target="8" />
       <module name="Redis" target="1.8" />
       <module name="Redisson" target="1.8" />
-      <module name="RocketMQ" target="1.5" />
+      <module name="RocketMQ" target="8" />
       <module name="SpringBoot" target="1.8" />
       <module name="Stream" target="1.8" />
       <module name="ThreadPool-spring-boot-starterr" target="1.8" />

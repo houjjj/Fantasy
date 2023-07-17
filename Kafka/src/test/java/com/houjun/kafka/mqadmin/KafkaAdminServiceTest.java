@@ -20,9 +20,9 @@ class KafkaAdminServiceTest {
     @BeforeEach
     void setUp() {
 //        String bootstrapServers = "172.16.207.14:9092, 172.16.203.27:9092, 172.16.203.26:9092";
-        String bootstrapServers = "192.168.1.70:32011,192.168.1.73:32012,192.168.1.72:32013";
-        String username = "houjun";
-        String password = "Admin123";
+        String bootstrapServers = "192.168.12.82:9092,192.168.12.83:9092,192.168.12.86:9092";
+        String username = "";
+        String password = "";
         client = KafkaAdminService.getClient(bootstrapServers, username, password);
     }
 

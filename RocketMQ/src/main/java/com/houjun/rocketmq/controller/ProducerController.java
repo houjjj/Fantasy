@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -32,16 +33,20 @@ public class ProducerController {
     private String username;
     @Value("${rocketmq.password}")
     private String password;
+    @Value("${rocketmq.topic}")
+    private String topic;
+    @Value("${rocketmq.producerGroup}")
+    private String producerGroup;
 
-    @GetMapping("/add")
-    public String get() throws MQClientException, UnsupportedEncodingException, InterruptedException, RemotingException {
+
+    @GetMapping("/producer")
+    public String producer() throws MQClientException, UnsupportedEncodingException, InterruptedException, RemotingException {
         DefaultMQProducer producer;
         if (StringUtils.isEmpty(username)) {
-            System.out.println("无密码");
-            producer = new DefaultMQProducer("houjun");
+            producer = new DefaultMQProducer(producerGroup);
         } else {
             AclClientRPCHook auth = new AclClientRPCHook(new SessionCredentials(username, password));
-            producer = new DefaultMQProducer("houjun", auth);
+            producer = new DefaultMQProducer(producerGroup, auth);
         }
         // 设置NameServer的地址
         producer.setNamesrvAddr(url);
@@ -56,10 +61,10 @@ public class ProducerController {
         for (int i = 0; i < messageCount; i++) {
             final int index = i;
             // 创建消息，并指定Topic，Tag和消息体
-            Message msg = new Message("TopicTest",
+            Message msg = new Message(topic,
                     "TagA",
-                    "OrderID188",
-                    "Hello world".getBytes(RemotingHelper.DEFAULT_CHARSET));
+                    "Key1",
+                    ("Hello world  " + LocalDateTime.now()).getBytes(RemotingHelper.DEFAULT_CHARSET));
             // SendCallback接收异步返回结果的回调
             producer.send(msg, new SendCallback() {
                 @Override
@@ -81,6 +86,6 @@ public class ProducerController {
         countDownLatch.await(5, TimeUnit.SECONDS);
         // 如果不再发送消息，关闭Producer实例。
         producer.shutdown();
-        return "Hello world";
+        return "send successful";
     }
 }

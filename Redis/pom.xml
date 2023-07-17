@@ -33,5 +33,7 @@
         </dependency>
     </dependencies>
 
-
+<build>
+    <finalName>redis-test</finalName>
+</build>
 </project>
