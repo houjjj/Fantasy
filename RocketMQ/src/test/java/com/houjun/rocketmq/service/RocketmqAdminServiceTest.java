@@ -8,17 +8,20 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 /**
+ *
+ * rocketmq是去连接nameserver
  * @Author: houjun
  * @Date: 2023/6/12 - 15:35
  * @Description:
  */
 class RocketmqAdminServiceTest {
-    String nameServAddrs = "192.168.12.81:9876";
+    String nameServAddrs = "192.168.12.76:32008";
     RocketmqTopicDetail detail = null;
     MQAdminExt mqAdminExt = null;
-    String topicName = "topictest";
-    String username = "";
-    String password = "";
+    String topicName = "helloworld";
+    String username = "llLL1111";
+    String password = "llLL1111";
+    String clusterName = "ns-ll";
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
@@ -30,7 +33,7 @@ class RocketmqAdminServiceTest {
     @Test
     void createTopic() {
         detail.setTopicName(topicName);
-        detail.setClusterName("hj-ns1747");
+        detail.setClusterName(clusterName);
         RocketmqAdminService.createTopic(detail, username, password);
     }
 

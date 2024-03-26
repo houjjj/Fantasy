@@ -1,9 +1,6 @@
 spring:
-  redis:
-    lettuce:
-      cluster:
-        refresh:
-          period:
+  profiles:
+    active: proxy
 management:
   health:
     redis:

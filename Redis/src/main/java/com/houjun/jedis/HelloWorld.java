@@ -1,5 +1,6 @@
 package com.houjun.jedis;
 
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
@@ -11,6 +12,7 @@ import redis.clients.jedis.JedisPool;
 public class HelloWorld {
     public static void main(String[] args) {
         JedisPool pool = new JedisPool("192.168.20.106", 6379);
+//        JedisPool pool = new JedisPool( );
         try (Jedis resource = pool.getResource()) {
 //            resource.set("notion","china");
             System.out.println(resource.get("mama"));

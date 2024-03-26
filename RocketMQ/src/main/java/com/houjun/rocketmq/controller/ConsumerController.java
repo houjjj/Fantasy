@@ -1,5 +1,6 @@
 package com.houjun.rocketmq.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.rocketmq.acl.common.AclClientRPCHook;
 import org.apache.rocketmq.acl.common.SessionCredentials;
@@ -14,8 +15,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Author: houjun
@@ -68,5 +70,18 @@ public class ConsumerController {
         // 启动消费者实例
         consumer.start();
         return "Consumer Started.";
+    }
+
+    public static void main(String[] args) {
+        Set<String> list = new HashSet<>();
+        list.add("mysql-bin.000001");
+        list.add("mysql-bin.000002");
+        list.add("mysql-bin.000003");
+        list.add("mysql-bin.000006");
+        list.add("mysql-bin.000004");
+        list.add("mysql-bin.000005");
+        list.add("azmysql-bin.000000");
+        String max = Collections.max(list);
+        System.out.println(max);
     }
 }
