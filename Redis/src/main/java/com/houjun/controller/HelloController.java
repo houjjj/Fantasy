@@ -1,8 +1,18 @@
 package com.houjun.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.houjun.config.AsyncTask;
+import javafx.application.Application;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisSentinelConnection;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -32,6 +42,27 @@ public class HelloController {
     @Autowired
     AsyncTask asyncTask;
 
+    @GetMapping("/setkey")
+    public void setkey(String key, String value) {
+        ValueOperations ops = redisTemplate.opsForValue();
+        long start = System.currentTimeMillis();
+        log.info("set start {}", start);
+        ops.set(key, value);
+        long end = System.currentTimeMillis();
+        log.info("set end {} ,duration {},", end, (end - start) / 1000);
+    }
+
+    @GetMapping("/getkey")
+    public Object getkey(String key) {
+        ValueOperations ops = redisTemplate.opsForValue();
+        long start = System.currentTimeMillis();
+        log.info("set start {}", start);
+        Object value = ops.get(key);
+        long end = System.currentTimeMillis();
+        log.info("set end {} ,duration {},", end, (end - start) / 1000);
+        return value;
+    }
+
     @GetMapping("/set")
     public void start(int count) throws InterruptedException {
         for (int i = 0; i < count; i++) {
@@ -45,9 +76,22 @@ public class HelloController {
         }
     }
 
+    @Autowired
+    private ApplicationContext applicationContext;
+
     @GetMapping("/get")
     public void get(int count) throws InterruptedException {
         ValueOperations ops = redisTemplate.opsForValue();
+        RedisSentinelConnection sentinelConnection = redisTemplate.getConnectionFactory().getSentinelConnection();
+        System.out.println(JsonUtil.toJson(sentinelConnection));
+        RedisConnectionFactory factory = applicationContext.getBean(RedisConnectionFactory.class);
+        LettuceConnectionFactory lettuceConnectionFactory = applicationContext.getBean(LettuceConnectionFactory.class);
+        System.out.println(lettuceConnectionFactory.getHostName() + ":" + lettuceConnectionFactory.getPort());
+        System.out.println(lettuceConnectionFactory.getPassword());
+        System.out.println(lettuceConnectionFactory.getSentinelConfiguration().getSentinels());
+        System.out.println(lettuceConnectionFactory.getSentinelConfiguration().getMaster());
+        System.out.println(lettuceConnectionFactory.getSentinelConfiguration());
+        System.out.println(JsonUtil.toJson(lettuceConnectionFactory));
         long start = System.currentTimeMillis();
         log.info("get start {}", start);
         for (int i = 0; i < count; i++) {
@@ -105,6 +149,11 @@ public class HelloController {
             log.info("pub  ");
             Thread.sleep(3000);
         }
+    }
+
+    @GetMapping("/channels")
+    public void channels() throws InterruptedException {
+
     }
 
 

@@ -34,7 +34,7 @@ public class RedisListener implements MessageListener {
     RedisMessageListenerContainer redisMessageListenerContainer = new RedisMessageListenerContainer();
     redisMessageListenerContainer.setConnectionFactory(redisConnectionFactory);
     //订阅topic - subscribe
-    redisMessageListenerContainer.addMessageListener(redisListener,new ChannelTopic("subscribe"));
+    redisMessageListenerContainer.addMessageListener(redisListener,new ChannelTopic("cache:redis:caffeine:topic"));
     return redisMessageListenerContainer;
   }
 

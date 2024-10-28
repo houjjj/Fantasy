@@ -21,6 +21,11 @@
         <module>Redis</module>
         <module>MongoDB</module>
         <module>Redisson</module>
+        <module>feign</module>
+        <module>eureka</module>
+        <module>provider</module>
+        <module>Jedis</module>
+        <module>Druid</module>
     </modules>
     <dependencies>
         <dependency>

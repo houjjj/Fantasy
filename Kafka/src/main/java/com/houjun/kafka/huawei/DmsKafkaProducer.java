@@ -10,7 +10,7 @@ import java.util.UUID;
 /**
  * @author huaweicloud DMS
  */
-@Component
+//@Component
 public class DmsKafkaProducer {
     /**
      * Topic名称,根据实际情况修改

@@ -9,7 +9,7 @@ import java.util.Optional;
 /**
  * @author huaweicloud DMS
  */
-@Component
+//@Component
 public class DmsKafkaConsumer {
     /**
      * Topic名称，根据实际情况修改

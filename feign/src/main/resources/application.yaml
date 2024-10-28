@@ -1,0 +1,13 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-order-service
+
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      #单机版
+      defaultZone: http://localhost:1111/eureka/

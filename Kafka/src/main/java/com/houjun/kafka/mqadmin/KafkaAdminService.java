@@ -157,7 +157,7 @@ public class KafkaAdminService {
         if (!BROKER_PATTERN.matcher(brokers).matches()) {
 //            throw new Runn(600, "broker 列表是不是逗号分隔的 ip:port 格式？");
         }
-        String jaasTemplate = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"houjun\" password=\"Admin123\";";
+        String jaasTemplate = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\""+username+"\" password=\""+password+"\";";
         String jaasCfg = String.format(jaasTemplate, username, password);
 
         Map<String, Object> props = new HashMap<>();

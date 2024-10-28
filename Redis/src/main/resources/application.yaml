@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: proxy
+    active: sentinel
 management:
   health:
     redis:

@@ -1,7 +1,9 @@
 spring:
   kafka:
-    bootstrap-servers: 172.16.207.14:9092, 172.16.203.27:9092, 172.16.203.26:9092  #bootstrap-servers：连接kafka的地址，多个地址用逗号分隔
-#    bootstrap-servers: 192.168.1.73:32012,192.168.1.73:32011,192.168.1.73:32013  #bootstrap-servers：连接kafka的地址，多个地址用逗号分隔
+    username: kafka
+    password: Admin@123
+#    bootstrap-servers: 10.2.104.143:31171,10.2.104.143:31172,10.2.104.143:31173  #bootstrap-servers：连接kafka的地址，多个地址用逗号分隔
+    bootstrap-servers: 192.168.12.76:30072,192.168.12.76:30069,192.168.12.76:30068  #bootstrap-servers：连接kafka的地址，多个地址用逗号分隔
     consumer:
       group-id: myGroup
       enable-auto-commit: true
@@ -11,6 +13,8 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       auto-offset-reset: earliest
+    jaas:
+      enabled: true
     producer:
       retries: 0 #若设置大于0的值，客户端会将发送失败的记录重新发送
       batch-size: 16384 #当将多个记录被发送到同一个分区时， Producer 将尝试将记录组合到更少的请求中。这有助于提升客户端和服务器端的性能。这个配置控制一个批次的默认大小（以字节为单位）。16384是缺省的配置
@@ -23,7 +27,7 @@ spring:
       sasl:
         mechanism: PLAIN
         jaas:
-          config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="houjun" password="Admin123";'
+          config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="kafka" password="jycytPrd@kafka0719";'
 
 #spring:
 #  port: 8081
@@ -37,16 +41,17 @@ spring:
 #      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 #      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 #      auto-offset-reset: earliest
-#    properties:
-#      security:
-#        protocol: SASL_PLAINTEXT
-#      sasl:
-#        mechanism: PLAIN
-#        jaas:
-#          config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="houjun" password="Admin123";'
+##    properties:
+##      security:
+##        protocol: SASL_PLAINTEXT
+##      sasl:
+##        mechanism: PLAIN
+##        jaas:
+##          config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="houjun" password="Admin123";'
 #    jaas:
 #      enabled: true
 #    bootstrap-servers:
-#      - 192.168.1.73:32012
-#      - 192.168.1.70:32011
-#      - 192.168.1.72:32013
+#    - '192.168.12.76:30097'
+#    - '192.168.12.76:30096'
+#    - '192.168.12.76:30095'
+

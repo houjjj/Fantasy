@@ -22,15 +22,14 @@ public class KafkaSender {
 
     private Gson gson = new GsonBuilder().create();
 
-    public void send(String msg) {
+    public void send(String topic,String msg) {
         Message message = new Message();
-
         message.setId(System.currentTimeMillis());
         message.setMsg(msg);
         message.setSendTime(new Date());
-        log.info("【++++++++++++++++++ message ：{}】", gson.toJson(message));
         //对 topic =  hello2 的发送消息
-        kafkaTemplate.send("hello", gson.toJson(message));
+        kafkaTemplate.send(topic, gson.toJson(message));
+        log.info("【++++++++++++++++++ message ：{}】", gson.toJson(message));
     }
 
 }

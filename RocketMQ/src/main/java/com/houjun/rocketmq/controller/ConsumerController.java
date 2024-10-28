@@ -61,8 +61,14 @@ public class ConsumerController {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
                 for (MessageExt msg : msgs) {
-                    System.out.println(new String(msg.getBody(), StandardCharsets.UTF_8));
+                    System.out.println("consumed:" + new String(msg.getBody(), StandardCharsets.UTF_8));
                 }
+//                try {
+//                    System.out.println("卡住");
+//                    Thread.sleep(100);// 10分钟
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
                 // 标记该消息已经被成功消费
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
@@ -84,4 +90,5 @@ public class ConsumerController {
         String max = Collections.max(list);
         System.out.println(max);
     }
+
 }

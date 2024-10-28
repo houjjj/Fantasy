@@ -12,7 +12,7 @@ import java.util.Optional;
 public class KafkaConsumer {
 
 
-    @KafkaListener(topics = {"hello2"})
+/*    @KafkaListener(topics = {"hello2"})
     public void listen(ConsumerRecord<?, ?> record) {
 
         Optional.ofNullable(record.value())
@@ -20,6 +20,6 @@ public class KafkaConsumer {
                     log.info("【+++++++++++++++++ record = {} 】", record);
                     log.info("【+++++++++++++++++ message = {}】", message);
                 });
-    }
+    }*/
 
 }

@@ -1,16 +1,16 @@
 spring:
   redis:
     sentinel:
-      master: test1
-      nodes: "192.102.20.208:32172"
-    password: Root1234
+      master: tyrz
+      nodes: "10.2.118.124:31245"
+    password: TypzPrd@redis0519
     jedis:
       pool:
         max-active: 200
         max-wait: -1
         max-idle: 10
         min-idle: 0
-    database: 12
+
 
 management:
   health:
