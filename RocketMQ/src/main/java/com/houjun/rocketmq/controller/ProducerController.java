@@ -76,7 +76,7 @@ public class ProducerController {
         producer.start();
         producer.setRetryTimesWhenSendAsyncFailed(3);
 
-        int messageCount = 100;
+        int messageCount = 10;
 
         // 根据消息数量实例化倒计时计算器
 //        final CountDownLatch2 countDownLatch = new CountDownLatch2(messageCount);

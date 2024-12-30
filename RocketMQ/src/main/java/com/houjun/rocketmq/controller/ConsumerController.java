@@ -78,17 +78,6 @@ public class ConsumerController {
         return "Consumer Started.";
     }
 
-    public static void main(String[] args) {
-        Set<String> list = new HashSet<>();
-        list.add("mysql-bin.000001");
-        list.add("mysql-bin.000002");
-        list.add("mysql-bin.000003");
-        list.add("mysql-bin.000006");
-        list.add("mysql-bin.000004");
-        list.add("mysql-bin.000005");
-        list.add("azmysql-bin.000000");
-        String max = Collections.max(list);
-        System.out.println(max);
-    }
+
 
 }

@@ -1,4 +1,4 @@
-package com.houjun.elasticsearch.helloworld;
+package com.houjun.elasticsearch.helloworld.domain;
 
 import lombok.Data;
 

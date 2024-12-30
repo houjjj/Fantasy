@@ -21,7 +21,7 @@ public class KafkaProducerController {
 
     @GetMapping("{topic}/send/{msg}")
     public void sendMessage(@PathVariable("topic") String topic, @PathVariable("msg") String msg) {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1000; i++) {
             kafkaSender.send(topic, msg + i);
         }
     }

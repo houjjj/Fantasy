@@ -1,9 +1,9 @@
 spring:
   kafka:
-    username: kafka
-    password: Admin@123
+    username: sysadmin
+    password: Newdt@123
 #    bootstrap-servers: 10.2.104.143:31171,10.2.104.143:31172,10.2.104.143:31173  #bootstrap-servers：连接kafka的地址，多个地址用逗号分隔
-    bootstrap-servers: 192.168.12.76:30072,192.168.12.76:30069,192.168.12.76:30068  #bootstrap-servers：连接kafka的地址，多个地址用逗号分隔
+    bootstrap-servers: 192.168.12.70:30005,192.168.12.70:30021,192.168.12.70:30020  #bootstrap-servers：连接kafka的地址，多个地址用逗号分隔
     consumer:
       group-id: myGroup
       enable-auto-commit: true
@@ -27,7 +27,7 @@ spring:
       sasl:
         mechanism: PLAIN
         jaas:
-          config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="kafka" password="jycytPrd@kafka0719";'
+          config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="sysadmin" password="Newdt@123";'
 
 #spring:
 #  port: 8081

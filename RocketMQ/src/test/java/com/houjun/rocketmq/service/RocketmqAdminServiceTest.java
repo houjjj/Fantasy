@@ -15,13 +15,13 @@ import java.util.List;
  * @Description:
  */
 class RocketmqAdminServiceTest {
-    String nameServAddrs = "192.168.12.76:30014";
+    String nameServAddrs = "192.168.1.103:30001";
     RocketmqTopicDetail detail = null;
     MQAdminExt mqAdminExt = null;
     String topicName = "topictest";
-    String username = "";
-    String password = "";
-    String clusterName = "hj-mq1652";
+    String username = "brokeradmin";
+    String password = "1qaz@WSX9ijn)OKM";
+    String clusterName = "ycc-mq";
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {

@@ -1,6 +1,7 @@
-package com.houjun.elasticsearch.helloworld;
+package com.houjun.elasticsearch.helloworld.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.houjun.elasticsearch.helloworld.domain.User;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;

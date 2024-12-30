@@ -1,4 +1,4 @@
-package com.houjun.elasticsearch.helloworld;
+package com.houjun.elasticsearch.helloworld.test;
 
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
