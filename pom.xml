@@ -26,6 +26,7 @@
         <module>provider</module>
         <module>Jedis</module>
         <module>Druid</module>
+        <module>Hikari</module>
     </modules>
     <dependencies>
         <dependency>

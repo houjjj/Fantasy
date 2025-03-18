@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.1.73:30666/shindb?characterEncoding=utf8&serverTimezone=UTC
+    username: k8sadmin
+    password: k8sadmin
+#    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: MyAppPool
+      # 连接池容量
+      minimum-idle: 50
+      maximum-pool-size: 50
+      # 超时控制
+      connection-timeout: 4000  # 30秒
+      idle-timeout: 600000       # 10分钟
+      max-lifetime: 1800000      # 30分钟
+

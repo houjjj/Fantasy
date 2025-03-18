@@ -26,6 +26,7 @@
         <module name="ElasticSearch" />
         <module name="provider" />
         <module name="JavaBase" />
+        <module name="Hikari" />
         <module name="Stream" />
         <module name="MongoDB" />
         <module name="ThreadPool-spring-boot-starterr" />
@@ -39,6 +40,8 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Druid" options="-parameters" />
+      <module name="Hikari" options="-parameters" />
       <module name="MongoDB" options="" />
       <module name="Quartz" options="" />
       <module name="Redisson" options="" />
