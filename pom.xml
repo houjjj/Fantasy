@@ -27,6 +27,7 @@
         <module>Jedis</module>
         <module>Druid</module>
         <module>Hikari</module>
+        <module>Flink</module>
     </modules>
     <dependencies>
         <dependency>

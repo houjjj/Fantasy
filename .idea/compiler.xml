@@ -19,6 +19,7 @@
         <module name="Redis" />
         <module name="SpringBoot" />
         <module name="Quartz" />
+        <module name="Flink" />
         <module name="RocketMQ" />
         <module name="Redisson" />
         <module name="Jedis" />

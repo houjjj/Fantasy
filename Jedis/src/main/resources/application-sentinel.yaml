@@ -1,0 +1,18 @@
+spring:
+  redis:
+    sentinel:
+      master: tyrz
+      nodes: "10.2.118.124:31245"
+    password: TypzPrd@redis0519
+    jedis:
+      pool:
+        max-active: 200
+        max-wait: -1
+        max-idle: 10
+        min-idle: 0
+
+
+management:
+  health:
+    redis:
+      enabled: false
