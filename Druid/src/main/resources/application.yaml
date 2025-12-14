@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+#      url: jdbc:mysql://192.168.1.73:30027/cust1?characterEncoding=utf8&serverTimezone=UTC
+      url: jdbc:mysql://192.102.31.141:30210/cust1?characterEncoding=utf8&serverTimezone=UTC
+      username: k8sadmin
+      password: k8sadmin
+      max-active: 100
+      min-idle: 10
+      initial-size: 5
+      test-on-borrow: true
+      validation-query: select 1
+
+

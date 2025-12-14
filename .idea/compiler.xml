@@ -19,6 +19,7 @@
         <module name="Redis" />
         <module name="SpringBoot" />
         <module name="Quartz" />
+        <module name="Flink" />
         <module name="RocketMQ" />
         <module name="Redisson" />
         <module name="Jedis" />
@@ -26,6 +27,7 @@
         <module name="ElasticSearch" />
         <module name="provider" />
         <module name="JavaBase" />
+        <module name="Hikari" />
         <module name="Clickhouse" />
         <module name="Stream" />
         <module name="MongoDB" />
@@ -41,6 +43,8 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Druid" options="-parameters" />
+      <module name="Hikari" options="-parameters" />
       <module name="MongoDB" options="" />
       <module name="Quartz" options="" />
       <module name="Redisson" options="" />

@@ -1,5 +1,6 @@
 package com.houjun.rocketmq.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.houjun.rocketmq.domain.RocketmqMessageQuery;
 import com.houjun.rocketmq.domain.RocketmqMessageView;
 import com.houjun.rocketmq.domain.RocketmqTopicDetail;
@@ -47,9 +48,9 @@ public class ProducerController {
 
     @Value("${rocketmq.url}")
     private String url;
-    @Value("${rocketmq.username}")
+    @Value("${rocketmq.username:}")
     private String username;
-    @Value("${rocketmq.password}")
+    @Value("${rocketmq.password:}")
     private String password;
     @Value("${rocketmq.topic}")
     private String topic;
@@ -61,7 +62,8 @@ public class ProducerController {
     private RocketmqAdminService rocketmqAdminService;
 
     @GetMapping("/producer")
-    public String producer() throws MQClientException, UnsupportedEncodingException, InterruptedException, RemotingException {
+    public String producer(@RequestParam(value = "count", defaultValue = "1") Integer count)
+            throws MQClientException, UnsupportedEncodingException, InterruptedException, RemotingException, MQBrokerException {
         DefaultMQProducer producer;
         if (StringUtils.isEmpty(username)) {
             producer = new DefaultMQProducer(producerGroup);
@@ -76,33 +78,31 @@ public class ProducerController {
         producer.start();
         producer.setRetryTimesWhenSendAsyncFailed(3);
 
-        int messageCount = 10;
-
         // 根据消息数量实例化倒计时计算器
 //        final CountDownLatch2 countDownLatch = new CountDownLatch2(messageCount);
-        for (int i = 0; i < messageCount; i++) {
+        for (int i = 0; i < count; i++) {
             final int index = i;
             // 创建消息，并指定Topic，Tag和消息体
             Message msg = new Message(topic,
                     "TagA",
                     "Key1",
                     ("Hello world  " + index).getBytes(RemotingHelper.DEFAULT_CHARSET));
-
             // SendCallback接收异步返回结果的回调
-            producer.send(msg, new SendCallback() {
+        /*    producer.send(msg, new SendCallback() {
                 @Override
                 public void onSuccess(SendResult sendResult) {
 //                    countDownLatch.countDown();
-                    System.out.printf("producer %-10d OK %s %n", index, sendResult.getMsgId());
+                    System.out.printf("producer %s %n", JSON.toJSON(sendResult));
                 }
 
                 @Override
                 public void onException(Throwable e) {
 //                    countDownLatch.countDown();
                     System.out.printf("producer %-10d Exception %s %n", index, e);
-//                    e.printStackTrace();
                 }
-            });
+            });*/
+            SendResult send = producer.send(msg);
+            System.out.println("producer " + JSON.toJSON(send));
             Thread.sleep(200);
         }
         // 等待5s
@@ -113,9 +113,8 @@ public class ProducerController {
     }
 
 
-
     @GetMapping("/delay")
-    public void delayProducer() throws MQClientException, MQBrokerException, RemotingException, InterruptedException {
+    public void delayProducer(@RequestParam(defaultValue = "1") Integer total) throws MQClientException, MQBrokerException, RemotingException, InterruptedException {
         DefaultMQProducer producer;
         if (StringUtils.isEmpty(username)) {
             producer = new DefaultMQProducer(producerGroup);
@@ -128,29 +127,17 @@ public class ProducerController {
 
         // 启动Producer实例
         producer.start();
-        int totalMessagesToSend = 100;
-        for (int i = 0; i < totalMessagesToSend; i++) {
+
+        for (int i = 0; i < total; i++) {
             Message message = new Message(topic, ("Hello scheduled message " + i).getBytes());
             // This message will be delivered to consumer 10 seconds later.
             message.setDelayTimeLevel(delayLevel);
             // Send the message
             SendResult send = producer.send(message);
-            System.out.println("发送延时消息：" + send.getMsgId());
+            System.out.println("producer delay " + JSON.toJSON(send));
         }
         producer.shutdown();
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @GetMapping("/copy")
@@ -215,7 +202,7 @@ public class ProducerController {
         int port = 22;
         // 建立SSH连接
 
-        log.info("[getSshSession] username:{},host:{},password:{},port:{}",username, host, password, port);
+        log.info("[getSshSession] username:{},host:{},password:{},port:{}", username, host, password, port);
         Session session = jsch.getSession(username, host, port);
         session.setPassword(password);
         session.setConfig("StrictHostKeyChecking", "no");
@@ -225,7 +212,6 @@ public class ProducerController {
     }
 
 
-
     @GetMapping("/listTopic")
     void listTopic() {
         RocketmqTopicDetail detail = new RocketmqTopicDetail();
@@ -233,6 +219,7 @@ public class ProducerController {
         List<SimpleRocketmqTopicInfo> simpleRocketmqTopicInfos = RocketmqAdminService.listTopic(detail, username, password);
         simpleRocketmqTopicInfos.forEach(System.out::println);
     }
+
     @GetMapping("/queryByTopic")
     void queryByTopic(@RequestParam("topicName") String topicName) {
         RocketmqMessageQuery query = new RocketmqMessageQuery();
@@ -242,7 +229,7 @@ public class ProducerController {
         for (RocketmqMessageView rocketmqMessageView : rocketmqMessageViews) {
             System.out.println(rocketmqMessageView);
         }
-     }
+    }
 
 
 }

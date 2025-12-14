@@ -10,8 +10,8 @@
         <version>2.7.18</version> <!-- 使用Java 8兼容版本 -->
         <relativePath/>
     </parent>
-    <artifactId>Druid</artifactId>
-    <name>Druid</name>
+    <artifactId>Hikari</artifactId>
+    <name>Hikari</name>
     <url>http://maven.apache.org</url>
     <properties>
         <java.version>1.8</java.version>
@@ -51,11 +51,11 @@
         </dependency>
 
         <!-- Druid连接池 -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba</groupId>-->
+<!--            <artifactId>druid-spring-boot-starter</artifactId>-->
+<!--            <version>${druid.version}</version>-->
+<!--        </dependency>-->
 
         <!-- MySQL驱动 -->
         <dependency>

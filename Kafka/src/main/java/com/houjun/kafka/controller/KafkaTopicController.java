@@ -52,4 +52,10 @@ public class KafkaTopicController {
         }
         return res;
     }
+    @GetMapping("/create")
+    public String createTopic() throws ExecutionException, InterruptedException {
+        AdminClient client = KafkaAdminService.getClient(bootstrapServers, username, password);
+
+        return "ok";
+    }
 }

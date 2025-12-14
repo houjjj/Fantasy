@@ -10,6 +10,7 @@ import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.consumer.rebalance.AllocateMessageQueueAveragely;
 import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,9 +30,9 @@ public class ConsumerController {
 
     @Value("${rocketmq.url}")
     private String url;
-    @Value("${rocketmq.username}")
+    @Value("${rocketmq.username:}")
     private String username;
-    @Value("${rocketmq.password}")
+    @Value("${rocketmq.password:}")
     private String password;
     @Value("${rocketmq.topic}")
     private String topic;
@@ -53,6 +54,7 @@ public class ConsumerController {
 
         // 设置NameServer的地址
         consumer.setNamesrvAddr(url);
+        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
 
         // 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息
         consumer.subscribe(topic, subExpression);
