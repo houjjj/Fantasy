@@ -26,6 +26,8 @@
         <module>provider</module>
         <module>Jedis</module>
         <module>Druid</module>
+        <module>Clickhouse</module>
+        <module>Postgres</module>
     </modules>
     <dependencies>
         <dependency>

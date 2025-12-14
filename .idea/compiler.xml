@@ -26,8 +26,10 @@
         <module name="ElasticSearch" />
         <module name="provider" />
         <module name="JavaBase" />
+        <module name="Clickhouse" />
         <module name="Stream" />
         <module name="MongoDB" />
+        <module name="Postgres" />
         <module name="ThreadPool-spring-boot-starterr" />
         <module name="feign" />
         <module name="Mybatis" />
