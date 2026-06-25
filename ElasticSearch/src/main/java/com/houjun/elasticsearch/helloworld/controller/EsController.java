@@ -49,6 +49,214 @@ public class EsController {
         return false;
     }
 
+    @RequestMapping("/createIndex2")
+    public Boolean createIndex2(String indexName) {
+        CreateIndexRequest request = new CreateIndexRequest(indexName);
+
+        request.mapping(
+                "{\n" +
+                        "  \"properties\": {\n" +
+                        "    \"aaaa\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"aaaa2\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"aaaa3\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"dzlx\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"dzjb\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"xzqhbm\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"ffcid\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"zt\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"province_code\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"city_code\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"county_code\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"post_code\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"town\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"town_code\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"village\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"village_code\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"address\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"word_cut\": {\n" +
+                        "      \"type\": \"text\"\n" +
+                        "    },\n" +
+                        "    \"word_cut2\": {\n" +
+                        "      \"type\": \"text\"\n" +
+                        "    },\n" +
+                        "    \"word_cut3\": {\n" +
+                        "      \"type\": \"text\"\n" +
+                        "    },\n" +
+                        "    \"word_cut4\": {\n" +
+                        "      \"type\": \"text\"\n" +
+                        "    },\n" +
+                        "    \"tokenize\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"location\": {\n" +
+                        "      \"type\": \"geo_point\"\n" +
+                        "    },\n" +
+                        "    \"poi_name\": {\n" +
+                        "      \"type\": \"text\"\n" +
+                        "    },\n" +
+                        "    \"poi_name_keyword\": {\n" +
+                        "      \"type\": \"text\",\n" +
+                        "      \"fields\": {\n" +
+                        "        \"keyword\": {\n" +
+                        "          \"ignore_above\": 256,\n" +
+                        "          \"type\": \"keyword\"\n" +
+                        "        }\n" +
+                        "      }\n" +
+                        "    },\n" +
+                        "    \"gate_num\": {\n" +
+                        "      \"type\": \"double\"\n" +
+                        "    },\n" +
+                        "    \"doc_type\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"content\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"jdm\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"is_important\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"origin_addr\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"origin_content\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"origin_tokenize\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"create_time\": {\n" +
+                        "      \"type\": \"date\",\n" +
+                        "      \"format\": \"yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis\"\n" +
+                        "    }\n" +
+                        "  }\n" +
+                        "}",
+                XContentType.JSON);
+        try {
+            client.indices().create(request, RequestOptions.DEFAULT);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    @RequestMapping("/createIndex3")
+    public Boolean createIndex3(String indexName) {
+        CreateIndexRequest request = new CreateIndexRequest(indexName);
+
+        request.mapping(
+                "{\n" +
+                        "  \"properties\": {\n" +
+                        "    \"aaaa\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"aaaa2\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"aaaa3\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"dzlx\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"dzjb\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"xzqhbm\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"ffcid\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"zt\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"province_code\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"city_code\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"county_code\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"post_code\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"town\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"town_code\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"village\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"village_code\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"address\": {\n" +
+                        "      \"type\": \"keyword\"\n" +
+                        "    },\n" +
+                        "    \"word_cut\": {\n" +
+                        "      \"type\": \"text\"\n" +
+                        "    },\n" +
+                        "    \"word_cut2\": {\n" +
+                        "      \"type\": \"text\"\n" +
+                        "    },\n" +
+                        "    \"word_cut3\": {\n" +
+                        "      \"type\": \"text\"\n" +
+                        "    }\n" +
+                        "  }\n" +
+                        "}",
+                XContentType.JSON);
+        try {
+            client.indices().create(request, RequestOptions.DEFAULT);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     @RequestMapping("/deleteIndex")
     public Boolean deleteIndex(String indexName){
         DeleteIndexRequest deleteIndexRequest = new DeleteIndexRequest(indexName);

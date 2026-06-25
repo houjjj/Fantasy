@@ -1,9 +1,7 @@
 spring:
+  port: 9999
   kafka:
-    username: sysadmin
-    password: Newdt@123
-#    bootstrap-servers: 10.2.104.143:31171,10.2.104.143:31172,10.2.104.143:31173  #bootstrap-servers：连接kafka的地址，多个地址用逗号分隔
-    bootstrap-servers: 192.168.12.70:30005,192.168.12.70:30021,192.168.12.70:30020  #bootstrap-servers：连接kafka的地址，多个地址用逗号分隔
+    bootstrap-servers: 192.168.1.73:30003  #bootstrap-servers：连接kafka的地址，多个地址用逗号分隔
     consumer:
       group-id: myGroup
       enable-auto-commit: true
@@ -12,7 +10,7 @@ spring:
         session.timeout.ms: 15000
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      auto-offset-reset: earliest
+      auto-offset-reset: earliest #earliest
     jaas:
       enabled: true
     producer:
@@ -25,9 +23,11 @@ spring:
       security:
         protocol: SASL_PLAINTEXT
       sasl:
-        mechanism: PLAIN
+#        mechanism: PLAIN
+        mechanism: SCRAM-SHA-256
         jaas:
-          config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="sysadmin" password="Newdt@123";'
+          config: 'org.apache.kafka.common.security.scram.ScramLoginModule required username="lisi" password="Admin@456";'
+#          config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="admin123" password="Admin@456";'
 
 #spring:
 #  port: 8081

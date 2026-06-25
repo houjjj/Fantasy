@@ -1,6 +1,5 @@
 package com.houjun.rocketmq.service;
 
-import com.beust.jcommander.internal.Lists;
 import com.houjun.rocketmq.domain.*;
 import com.houjun.rocketmq.utils.CustomException;
 import lombok.extern.slf4j.Slf4j;
@@ -126,7 +125,7 @@ public class RocketmqAdminService {
             Set<String> masterSet = CommandUtil.fetchMasterAddrByClusterName(mqAdminExt, detail.getClusterName());
             mqAdminExt.deleteTopicInBroker(masterSet, detail.getTopicName());
             Set<String> nameServerSet = new HashSet<>(Arrays.asList(detail.getNameServAddrs().split(",")));
-            mqAdminExt.deleteTopicInNameServer(nameServerSet, detail.getTopicName());
+            mqAdminExt.deleteTopicInNameServer(nameServerSet, detail.getTopicName(),null);
         } catch (Exception e) {
             throw new CustomException(600, e.getMessage());
         } finally {
@@ -202,7 +201,7 @@ public class RocketmqAdminService {
         resetOffset(detail, username, password);
     }
 
-    public static MQAdminExt getAdminExt(String nameServAddrList, String username, String password) {
+   /* public static MQAdminExt getAdminExt(String nameServAddrList, String username, String password) {
         DefaultMQAdminExt mqAdminExt = null;
         //判断是否具有用户名和密码
         if (StringUtils.isEmpty(username) && StringUtils.isEmpty(password)) {
@@ -232,6 +231,49 @@ public class RocketmqAdminService {
         if (!connected) {
             throw new CustomException(600, nameServAddrList + " 一个能连的都没有");
         }
+        return mqAdminExt;
+    }*/
+
+
+    public static MQAdminExt getAdminExt(String nameServAddrList, String username, String password) {
+        String[] addrs = nameServAddrList.split(",");
+        DefaultMQAdminExt mqAdminExt = null;
+        boolean connected = false;
+
+        for (String currentAddr : addrs) {
+            // 1. 每次循环都创建一个全新的实例，避免 start() 重复调用导致状态错乱
+            if (StringUtils.isEmpty(username) && StringUtils.isEmpty(password)) {
+                mqAdminExt = new DefaultMQAdminExt(5_0000);
+            } else {
+                AclClientRPCHook aclClientRPCHook = new AclClientRPCHook(new SessionCredentials(username, password));
+                mqAdminExt = new DefaultMQAdminExt(aclClientRPCHook, 5_0000);
+            }
+
+            // 2. 关键：关闭 VIP 通道，防止它自作聪明去连 30037 端口
+            mqAdminExt.setVipChannelEnabled(false);
+            mqAdminExt.setNamesrvAddr(currentAddr);
+            // 可以根据需要调大超时时间，防止网络抖动
+            mqAdminExt.setMqClientApiTimeout(8_000);
+
+            try {
+                mqAdminExt.start();
+                connected = true;
+                // addr.set(currentAddr); // 确保你的 addr 变量在外部已定义
+                log.info("成功连接到 namesrv {}", currentAddr);
+                break; // 连上一个就足够了，直接跳出循环
+            } catch (MQClientException e) {
+                log.warn("{} connect failed, try next. Error: {}", currentAddr, e.getMessage());
+                // 失败了就把当前错误的实例 shutdown 掉，释放资源
+                if (mqAdminExt != null) {
+                    mqAdminExt.shutdown();
+                }
+            }
+        }
+
+        if (!connected || mqAdminExt == null) {
+            throw new CustomException(600, nameServAddrList + " 一个能连的都没有");
+        }
+
         return mqAdminExt;
     }
 
@@ -336,7 +378,7 @@ public class RocketmqAdminService {
         }
     }
 
-    public List<String> listConsumerGroup(String nameServAddrs, String topic, String username, String password) {
+    public static List<String> listConsumerGroup(String nameServAddrs, String topic, String username, String password) {
         MQAdminExt mqAdminExt = getAdminExt(nameServAddrs, username, password);
         try {
             GroupList groupList = mqAdminExt.queryTopicConsumeByWho(topic);
@@ -344,7 +386,8 @@ public class RocketmqAdminService {
             Collections.sort(res);
             return res;
         } catch (Exception e) {
-            throw wrap(e);
+            System.err.println(e.getMessage());
+            throw new CustomException(600, e.getMessage());
         } finally {
             mqAdminExt.shutdown();
         }
@@ -399,7 +442,7 @@ public class RocketmqAdminService {
         try {
             ConsumeStats consumeStats = mqAdminExt.examineConsumeStats(groupName, topic);
             List<MessageQueue> mqList = consumeStats.getOffsetTable().keySet().stream().filter(o -> StringUtils.isBlank(topic) || o.getTopic().equals(topic)).sorted().collect(Collectors.toList());
-            List<TopicConsumerInfo> topicConsumerInfoList = Lists.newArrayList();
+            List<TopicConsumerInfo> topicConsumerInfoList = new ArrayList<>();
             TopicConsumerInfo nowTopicConsumerInfo = null;
             Map<MessageQueue, String> messageQueueClientMap = getClientConnection(mqAdminExt, groupName);
             for (MessageQueue mq : mqList) {

@@ -15,19 +15,19 @@ import java.util.List;
  * @Description:
  */
 class RocketmqAdminServiceTest {
-    String nameServAddrs = "192.168.1.103:30001";
+    String nameServAddress = "192.168.1.72:30038";
     RocketmqTopicDetail detail = null;
     MQAdminExt mqAdminExt = null;
-    String topicName = "topictest";
-    String username = "brokeradmin";
-    String password = "1qaz@WSX9ijn)OKM";
+    String topicName = "cctv";
+    String username = "admin123";
+    String password = "Admin@456";
     String clusterName = "ycc-mq";
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
 //        mqAdminExt = RocketmqAdminService.getAdminExt();
         detail = new RocketmqTopicDetail();
-        detail.setNameServAddrs(nameServAddrs);
+        detail.setNameServAddrs(nameServAddress);
     }
 
     @Test
@@ -41,5 +41,13 @@ class RocketmqAdminServiceTest {
     void listTopic() {
         List<SimpleRocketmqTopicInfo> simpleRocketmqTopicInfos = RocketmqAdminService.listTopic(detail, username, password);
         simpleRocketmqTopicInfos.forEach(System.out::println);
+    }
+
+    @Test
+    void listConsumerGroup() {
+        List<String> strings = RocketmqAdminService.listConsumerGroup(nameServAddress, topicName, username, password);
+        for (String string : strings) {
+            System.out.println(string);
+        }
     }
 }

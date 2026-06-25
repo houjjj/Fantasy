@@ -1,21 +1,38 @@
-jetcache:
-  statIntervalMinutes: 15
-  areaInCacheName: false
-  local:
-    default:
-      type: linkedhashmap #other choose：caffeine
-      keyConvertor: fastjson2 #other choose：fastjson/jackson
-      limit: 100
-  remote:
-    default:
-      type: redis
-      keyConvertor: fastjson2 #other choose：fastjson/jackson
-      broadcastChannel: projectA
-      valueEncoder: java #other choose：kryo/kryo5
-      valueDecoder: java #other choose：kryo/kryo5
-      poolConfig:
-        minIdle: 5
-        maxIdle: 20
-        maxTotal: 50
-      host: ${redis.host}
-      port: ${redis.port}
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.1.73:30027/cust1?useSSL=false&serverTimezone=Asia/Shanghai
+#    url: jdbc:mysql://192.102.31.141:31092/cust1?useSSL=false&serverTimezone=Asia/Shanghai
+    username: k8sadmin
+    password: k8sadmin
+
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 200
+      max-wait: 60000
+#      time-between-eviction-runs-millis: 60000
+#      min-evictable-idle-time-millis: 300000
+#      validation-query: SELECT 1
+      test-while-idle: false
+      test-on-borrow: false
+      test-on-return: false
+#      pool-prepared-statements: true
+
+      # 监控统计拦截的filters
+      filters: stat,wall,slf4j
+
+      # Druid Web 监控页面设置
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: admin
+        login-password: admin
+        reset-enable: false
+
+      # SQL监控
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"

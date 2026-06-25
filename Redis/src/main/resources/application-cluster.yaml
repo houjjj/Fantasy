@@ -11,6 +11,7 @@ spring:
         max-idle: 10
         min-idle: 0
 
+
 management:
   health:
     redis:

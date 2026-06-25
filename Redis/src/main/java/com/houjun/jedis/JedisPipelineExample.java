@@ -7,8 +7,7 @@ import java.util.List;
 
 public class JedisPipelineExample {
     public static void main(String[] args) {
-//        try (Jedis jedis = new Jedis("192.168.2.128", 6379)) {
-        try (Jedis jedis = new Jedis("127.0.0.1", 6379)) {
+        try (Jedis jedis = new Jedis("localhost", 6379)) {
 
             Pipeline pipeline = jedis.pipelined();
 

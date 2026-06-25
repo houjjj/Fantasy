@@ -15,17 +15,25 @@ public class RocketMQTestJob {
     public static void main(String[] args) throws Exception {
 
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+//        StreamExecutionEnvironment env = StreamExecutionEnvironment.createRemoteEnvironment("localhost",8081);
         env.enableCheckpointing(5000);
 
-        env.fromSequence(1, 20) // 生成 20 条测试数据
+        env.fromSequence(1, 1) // 生成 20 条测试数据
                 .map(new RichMapFunction<Long, String>() {
                     private transient DefaultMQProducer producer; // 一定要 transient
 
                     @Override
                     public void open(Configuration parameters) throws Exception {
-                        AclClientRPCHook auth = new AclClientRPCHook(new SessionCredentials("rocketmq", "JdgzgcUat@mq0929"));
-                        producer = new DefaultMQProducer("flink-test-producer", auth);
-                        producer.setNamesrvAddr("10.2.49.49:30139"); // ← 修改为你自己的
+                        String os = System.getenv("os");
+                        if (!"Windows_NT".equals(os)) {
+                            AclClientRPCHook auth = new AclClientRPCHook(new SessionCredentials("admin123", "Admin@456"));
+                            producer = new DefaultMQProducer("flink-test-produce1r", auth);
+                            producer.setNamesrvAddr("192.102.31.141:32123"); // ← 修改为你自己的
+                        } else {
+                            // 本地
+                            producer = new DefaultMQProducer("flink-test-producer");
+                            producer.setNamesrvAddr("172.13.29.104:9876"); // ← 修改为你自己的
+                        }
                         producer.start();
                         log.info("Producer started.");
                     }
@@ -44,7 +52,7 @@ public class RocketMQTestJob {
                     }
 
                     @Override
-                    public void close() throws Exception {
+                    public void close() {
                         if (producer != null) {
                             producer.shutdown();
                         }

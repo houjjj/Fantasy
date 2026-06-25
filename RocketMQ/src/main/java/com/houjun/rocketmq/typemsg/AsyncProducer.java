@@ -1,43 +1,22 @@
-package com.houjun.springboot;
+package com.houjun.rocketmq.typemsg;
 
-import org.apache.rocketmq.acl.common.AclClientRPCHook;
-import org.apache.rocketmq.acl.common.SessionCredentials;
-import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.CountDownLatch2;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
-import org.apache.rocketmq.remoting.exception.RemotingException;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.io.UnsupportedEncodingException;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @Author: houjun
- * @Date: 2023/4/27 - 10:40
- * @Description:
- */
-@RestController
-public class ProducerController {
-    @Value("${rocketmq.url}")
-    private String url;
-    @Value("${rocketmq.username}")
-    private String username;
-    @Value("${rocketmq.password}")
-    private String password;
-
-    @GetMapping("/add")
-    public String get() throws MQClientException, UnsupportedEncodingException, InterruptedException, RemotingException {
-//        AclClientRPCHook auth = new AclClientRPCHook(new SessionCredentials(username, password));
+public class AsyncProducer {
+    public static void main(String[] args) throws Exception {
+//        System.setProperty("rocketmq.client.logback.resource.fileName", "logback.xml");
+//        System.setProperty("rocketmq.client.log.loadconfig", "false");
+        // 实例化消息生产者Producer
         DefaultMQProducer producer = new DefaultMQProducer("houjun");
         // 设置NameServer的地址
-        producer.setNamesrvAddr(url);
-
+        producer.setNamesrvAddr("172.28.95.17:9876");
         // 启动Producer实例
         producer.start();
         producer.setRetryTimesWhenSendAsyncFailed(0);
@@ -73,6 +52,5 @@ public class ProducerController {
         countDownLatch.await(5, TimeUnit.SECONDS);
         // 如果不再发送消息，关闭Producer实例。
         producer.shutdown();
-        return "Hello world";
     }
 }

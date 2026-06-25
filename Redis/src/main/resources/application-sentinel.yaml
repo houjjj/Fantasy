@@ -1,9 +1,9 @@
 spring:
   redis:
     sentinel:
-      master: tyrz
-      nodes: "10.2.118.124:31245"
-    password: TypzPrd@redis0519
+      master: gis-uat2
+      nodes: "26.8.48.23:30029"
+    password: gisUat@redis0624
     jedis:
       pool:
         max-active: 200

@@ -54,7 +54,51 @@ public class ConsumerController {
 
         // 设置NameServer的地址
         consumer.setNamesrvAddr(url);
+        // 1. 显式调大向 NameServer 请求组件的 RPC 同步超时时间（默认 3000）
+        consumer.setMqClientApiTimeout(10000); // 放大到 10 秒
+
+        consumer.setVipChannelEnabled(false);
+
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
+//consumer.setConsumeThreadMax();
+        // 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息
+        consumer.subscribe(topic, subExpression);
+        // 注册回调实现类来处理从broker拉取回来的消息
+        consumer.registerMessageListener(new MessageListenerConcurrently() {
+            @Override
+            public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
+                for (MessageExt msg : msgs) {
+                    System.out.println("【consumed】content:" + new String(msg.getBody(), StandardCharsets.UTF_8));
+//                    if (msg.getBornTimestamp() > 1776096000 || msg.getBrokerName().equalsIgnoreCase("")) {
+//                        System.exit(0);
+//                    }
+                    if (!msg.getBrokerName().equalsIgnoreCase("broker-1")) {
+                        continue;
+                    }
+                }
+                // 标记该消息已经被成功消费
+                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+            }
+        });
+        // 启动消费者实例
+        consumer.start();
+        return "Consumer Started.";
+    }
+
+    @GetMapping("/reset")
+    public String reset() throws MQClientException {
+        // 实例化消费者
+        DefaultMQPushConsumer consumer;
+        if (StringUtils.isEmpty(username)) {
+            consumer = new DefaultMQPushConsumer(consumerGroup);
+        } else {
+            AclClientRPCHook auth = new AclClientRPCHook(new SessionCredentials(username, password));
+            consumer = new DefaultMQPushConsumer(consumerGroup, auth, new AllocateMessageQueueAveragely());
+        }
+
+        // 设置NameServer的地址
+        consumer.setNamesrvAddr(url);
+//        consumer.setConsumeFromWhere(ConsumeFromWhere.);
 
         // 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息
         consumer.subscribe(topic, subExpression);
@@ -79,7 +123,6 @@ public class ConsumerController {
         consumer.start();
         return "Consumer Started.";
     }
-
 
 
 }

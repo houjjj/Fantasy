@@ -20,6 +20,7 @@ import org.springframework.util.NumberUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -155,5 +156,19 @@ public class HelloController {
 
     }
 
+    @GetMapping("/setBigkey")
+    public void setBigkey() {
+        ValueOperations ops = redisTemplate.opsForValue();
+        long start = System.currentTimeMillis();
+        log.info("set start {}", start);
+        String value = "强退\",\"dictValue\":\"7\",\"dictType\":\"sys_oper_type\",\"cssClass\":\"\",\"listClass\":\"danger\",\"isDefault\":\"N\",\"status\":\"0\",\"createBy\":\"admin\",\"createTime\":[\"java.sql.Timestamp\",1521171180000],\"updateBy\":\"ry\",\"updateTime\":[\"java.sql.Timestamp\",1521171180000],\"remark\":\"强退操作\",\"default\":false}],[\"com.yuntu.yungis.domain.entity.SysDictData\",{\"searchValue\":null,\"params\":[\"java.util.HashMap\",{}],\"dictCode\":25,\"dictSort\":8,\"dictLabel\":\"生成代码\",\"dictValue\":\"8\",\"dictType\":\"sys_oper_type\",\"cssClass\":\"\",\"listClass\":\"warning\",\"isDefault\":\"N\",\"status\":\"0\",\"createBy\":\"admin\",\"createTime\":[\"java.sql.Timestamp\",1521171180000],\"updateBy\":\"ry\",\"updateTime\":[\"java.sql.Timestamp\",1521171180000],\"remark\":\"生成操作\",\"default\":false}],[\"com.yuntu.yungis.domain.entity.SysDictData\",{\"searchValue\":null,\"params\":[\"java.util.HashMap\",{}],\"dictCode\":26,\"dictSort\":9,\"dictLabel\":\"清空数据\",\"dictValue\":\"9\",\"dictType\":\"sys_oper_type\",\"cssClass\":\"\",\"listClass\":\"danger\",\"isDefault\":\"N\",\"status\":\"0\",\"createBy\":\"admin\",\"createTime\":[\"java.sql.Timestamp\",1521171180000],\"updateBy\":\"ry\",\"updateTime\":[\"java.sql.Timestamp\",1521171180000],\"remark\":\"清空操作\",\"default\":false}]]]";
+        ops.set("bigkey-test", value);
+        long end = System.currentTimeMillis();
+        log.info("set end {} ,duration {},", end, (end - start) / 1000);
+    }
 
+    public static void main(String[] args) {
+        String value = "强退\",\"dictValue\":\"7\",\"dictType\":\"sys_oper_type\",\"cssClass\":\"\",\"listClass\":\"danger\",\"isDefault\":\"N\",\"status\":\"0\",\"createBy\":\"admin\",\"createTime\":[\"java.sql.Timestamp\",1521171180000],\"updateBy\":\"ry\",\"updateTime\":[\"java.sql.Timestamp\",1521171180000],\"remark\":\"强退操作\",\"default\":false}],[\"com.yuntu.yungis.domain.entity.SysDictData\",{\"searchValue\":null,\"params\":[\"java.util.HashMap\",{}],\"dictCode\":25,\"dictSort\":8,\"dictLabel\":\"生成代码\",\"dictValue\":\"8\",\"dictType\":\"sys_oper_type\",\"cssClass\":\"\",\"listClass\":\"warning\",\"isDefault\":\"N\",\"status\":\"0\",\"createBy\":\"admin\",\"createTime\":[\"java.sql.Timestamp\",1521171180000],\"updateBy\":\"ry\",\"updateTime\":[\"java.sql.Timestamp\",1521171180000],\"remark\":\"生成操作\",\"default\":false}],[\"com.yuntu.yungis.domain.entity.SysDictData\",{\"searchValue\":null,\"params\":[\"java.util.HashMap\",{}],\"dictCode\":26,\"dictSort\":9,\"dictLabel\":\"清空数据\",\"dictValue\":\"9\",\"dictType\":\"sys_oper_type\",\"cssClass\":\"\",\"listClass\":\"danger\",\"isDefault\":\"N\",\"status\":\"0\",\"createBy\":\"admin\",\"createTime\":[\"java.sql.Timestamp\",1521171180000],\"updateBy\":\"ry\",\"updateTime\":[\"java.sql.Timestamp\",1521171180000],\"remark\":\"清空操作\",\"default\":false}]]]";
+        System.out.println(value.getBytes(StandardCharsets.UTF_8).length);
+    }
 }

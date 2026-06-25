@@ -20,22 +20,22 @@ public class HelloController {
 //        System.out.println(poolExecutor.getPoolSize());
 //    }
 
-    @Autowired
-    HelloService helloService;
-
-    @GetMapping("update")
-    public void update() {
-        helloService.update();
-    }
-
-    @GetMapping("insert")
-    public void insert() {
-        helloService.insert();
-    }
-
-    @GetMapping("/{id}")
-    @ResponseBody
-    public CloudApp get(@PathVariable("id") int id) {
-        return helloService.get(id);
-    }
+//    @Autowired
+//    HelloService helloService;
+//
+//    @GetMapping("update")
+//    public void update() {
+//        helloService.update();
+//    }
+//
+//    @GetMapping("insert")
+//    public void insert( ) {
+//        helloService.insert(Integer.MAX_VALUE);
+//    }
+//
+//    @GetMapping("/{id}")
+//    @ResponseBody
+//    public CloudApp get(@PathVariable("id") int id) {
+//        return helloService.get(id);
+//    }
 }

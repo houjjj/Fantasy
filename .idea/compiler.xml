@@ -12,7 +12,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="JavaSE" />
-        <module name="Log-Demo" />
         <module name="JWT" />
         <module name="eureka" />
         <module name="Kafka" />
@@ -38,6 +37,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
+      <module name="Log-Demo" target="1.8" />
       <module name="Stream" target="1.8" />
     </bytecodeTargetLevel>
   </component>

@@ -1,11 +1,6 @@
 spring:
   redis:
-    .
-    #    cluster:
-    #      nodes:
-    #      - 192.123.123.123
-    #      - 192.123.123.23
-    #      - 192.123.123.232
+
     sentinel:
       master: hj-ha-old2043
       nodes:

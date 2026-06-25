@@ -1,13 +1,10 @@
 package com.houjun.rocketmq.domain;
 
 
-import com.beust.jcommander.internal.Lists;
 import com.houjun.rocketmq.utils.CustomException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.rocketmq.common.MQVersion;
 import org.apache.rocketmq.common.MixAll;
-import org.apache.rocketmq.common.Pair;
 import org.apache.rocketmq.common.admin.ConsumeStats;
 import org.apache.rocketmq.common.protocol.body.ClusterInfo;
 import org.apache.rocketmq.common.protocol.body.ConsumerConnection;
@@ -47,7 +44,7 @@ public class ConsumerGroupHelper {
         catch (Exception e) {
             throw wrap(e);
         }
-        List<ConsumeGroupInfo> consumeGroupInfoList = Lists.newArrayList();
+        List<ConsumeGroupInfo> consumeGroupInfoList = new ArrayList<>();
         for (Map.Entry<String, Set<String>> entry : consumerGroupMap.entrySet()) {
             for (String group : entry.getValue()) {
                 consumeGroupInfoList.add(queryGroup(mqAdminExt, entry.getKey(), group));

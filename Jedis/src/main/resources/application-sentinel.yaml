@@ -1,9 +1,9 @@
 spring:
   redis:
     sentinel:
-      master: tyrz
+      master: xxxx
       nodes: "10.2.118.124:31245"
-    password: TypzPrd@redis0519
+    password: xxxxx
     jedis:
       pool:
         max-active: 200

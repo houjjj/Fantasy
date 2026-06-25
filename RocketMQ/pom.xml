@@ -11,6 +11,11 @@
     <artifactId>RocketMQ</artifactId>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba</groupId>-->
+<!--            <artifactId>fastjson</artifactId>-->
+<!--            <version>2.0.15</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -46,7 +51,7 @@
         <dependency>
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-tools</artifactId>
-            <version>4.9.3</version>
+            <version>4.9.7</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -75,7 +80,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>rocketmq-demo</finalName>
+        <finalName>rocketmq-online-demo</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

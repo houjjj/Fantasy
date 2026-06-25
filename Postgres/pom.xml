@@ -16,6 +16,13 @@
             <artifactId>postgresql</artifactId>
             <version>42.7.3</version>
         </dependency>
+        <!-- Source: https://mvnrepository.com/artifact/org.opengauss/opengauss-jdbc -->
+<!--        <dependency>-->
+<!--            <groupId>org.opengauss</groupId>-->
+<!--            <artifactId>opengauss-jdbc</artifactId>-->
+<!--            <version>5.0.3</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
     </dependencies>
 
     <properties>

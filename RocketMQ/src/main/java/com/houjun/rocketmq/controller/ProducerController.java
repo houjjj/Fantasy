@@ -19,7 +19,6 @@ import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
-import org.apache.rocketmq.common.CountDownLatch2;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 import org.apache.rocketmq.remoting.exception.RemotingException;
@@ -33,9 +32,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @Author: houjun
@@ -62,7 +61,7 @@ public class ProducerController {
     private RocketmqAdminService rocketmqAdminService;
 
     @GetMapping("/producer")
-    public String producer(@RequestParam(value = "count", defaultValue = "1") Integer count)
+    public String producer(@RequestParam(value = "count", defaultValue = "10") Integer count)
             throws MQClientException, UnsupportedEncodingException, InterruptedException, RemotingException, MQBrokerException {
         DefaultMQProducer producer;
         if (StringUtils.isEmpty(username)) {
@@ -76,11 +75,44 @@ public class ProducerController {
 
         // 启动Producer实例
         producer.start();
-        producer.setRetryTimesWhenSendAsyncFailed(3);
+        producer.setSendMsgTimeout(50000);
 
-        // 根据消息数量实例化倒计时计算器
-//        final CountDownLatch2 countDownLatch = new CountDownLatch2(messageCount);
         for (int i = 0; i < count; i++) {
+            LocalDateTime now = LocalDateTime.now();
+            // 创建消息，并指定Topic，Tag和消息体.
+            String str = "Hello world  " + now;
+            byte[] bytes = str.getBytes(RemotingHelper.DEFAULT_CHARSET);
+            Message msg = new Message(topic,
+                    "TagA",
+                    "Key1",
+                    bytes);
+
+            SendResult send = producer.send(msg);
+            System.out.printf("【producer】content:%s,offsetMsgId:%s \n", str, send.getOffsetMsgId());
+            Thread.sleep(200);
+        }
+        // 如果不再发送消息，关闭Producer实例。;想要生产者在线，这里不能shutdown
+//        producer.shutdown();
+        return "send successful";
+    }
+
+    @GetMapping("/async")
+    public String async()
+            throws MQClientException, UnsupportedEncodingException, InterruptedException, RemotingException, MQBrokerException {
+        DefaultMQProducer producer;
+        if (StringUtils.isEmpty(username)) {
+            producer = new DefaultMQProducer(producerGroup);
+        } else {
+            AclClientRPCHook auth = new AclClientRPCHook(new SessionCredentials(username, password));
+            producer = new DefaultMQProducer(producerGroup, auth);
+        }
+        // 设置NameServer的地址
+        producer.setNamesrvAddr(url);
+        producer.setSendLatencyFaultEnable(true);
+        // 启动Producer实例
+        producer.start();
+
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
             final int index = i;
             // 创建消息，并指定Topic，Tag和消息体
             Message msg = new Message(topic,
@@ -88,33 +120,58 @@ public class ProducerController {
                     "Key1",
                     ("Hello world  " + index).getBytes(RemotingHelper.DEFAULT_CHARSET));
             // SendCallback接收异步返回结果的回调
-        /*    producer.send(msg, new SendCallback() {
+            producer.send(msg, new SendCallback() {
                 @Override
                 public void onSuccess(SendResult sendResult) {
-//                    countDownLatch.countDown();
                     System.out.printf("producer %s %n", JSON.toJSON(sendResult));
                 }
 
                 @Override
                 public void onException(Throwable e) {
-//                    countDownLatch.countDown();
                     System.out.printf("producer %-10d Exception %s %n", index, e);
                 }
-            });*/
-            SendResult send = producer.send(msg);
-            System.out.println("producer " + JSON.toJSON(send));
-            Thread.sleep(200);
+            });
+            Thread.sleep(500);
         }
-        // 等待5s
-//        countDownLatch.await(5, TimeUnit.SECONDS);
         // 如果不再发送消息，关闭Producer实例。
         producer.shutdown();
         return "send successful";
     }
 
+    @GetMapping("/sync")
+    public String batch()
+            throws MQClientException, UnsupportedEncodingException, InterruptedException, RemotingException, MQBrokerException {
+        DefaultMQProducer producer;
+        if (StringUtils.isEmpty(username)) {
+            producer = new DefaultMQProducer(producerGroup);
+        } else {
+            AclClientRPCHook auth = new AclClientRPCHook(new SessionCredentials(username, password));
+            producer = new DefaultMQProducer(producerGroup, auth);
+        }
+        // 设置NameServer的地址
+        producer.setNamesrvAddr(url);
+
+        // 启动Producer实例
+        producer.start();
+        producer.setSendMsgTimeout(6000);
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+            // 创建消息，并指定Topic，Tag和消息体
+            Message msg = new Message(topic,
+                    "TagA",
+                    "Key1",
+                    ("Hello world  " + i).getBytes(RemotingHelper.DEFAULT_CHARSET));
+
+            SendResult send = producer.send(msg);
+            System.out.println("producer: offsetId=" + JSON.toJSON(send));
+            Thread.sleep(200);// 每秒1条
+        }
+        // 如果不再发送消息，关闭Producer实例。
+        producer.shutdown();
+        return "send successful";
+    }
 
     @GetMapping("/delay")
-    public void delayProducer(@RequestParam(defaultValue = "1") Integer total) throws MQClientException, MQBrokerException, RemotingException, InterruptedException {
+    public void delayProducer(@RequestParam(defaultValue = "1") Integer count) throws MQClientException, MQBrokerException, RemotingException, InterruptedException {
         DefaultMQProducer producer;
         if (StringUtils.isEmpty(username)) {
             producer = new DefaultMQProducer(producerGroup);
@@ -128,7 +185,7 @@ public class ProducerController {
         // 启动Producer实例
         producer.start();
 
-        for (int i = 0; i < total; i++) {
+        for (int i = 0; i < count; i++) {
             Message message = new Message(topic, ("Hello scheduled message " + i).getBytes());
             // This message will be delivered to consumer 10 seconds later.
             message.setDelayTimeLevel(delayLevel);
@@ -231,5 +288,9 @@ public class ProducerController {
         }
     }
 
+    public static void main(String[] args) {
+        byte[] msgBytes = JSON.toJSONString("{\"op\":\"c\",\"ts_ms\":1762139106580,\"data\":{\"id\":1985181413591453697,\"line_id\":null,\"cust_bill_no\":\"ACMDZ1437736486185093\",\"bill_flag\":\"1\",\"bill_no\":\"148925623498_86972157440\",\"src_system\":\"YWJD\",\"cust_code\":\"1100173909382\",\"cust_name\":\"井研县佳源农资经营部(柑橘)\",\"party_code\":null,\"cust_sub_code\":null,\"post_org_code\":\"61310701\",\"post_org_name\":\"中国邮政集团有限公司四川省井研县三江邮政所\",\"settle_org_code\":null,\"settle_org_name\":null,\"biz_date\":1759075200000,\"total_amount\":null,\"postage_paid\":5.000000,\"postage_other\":0.000000,\"payment_mode\":null,\"settlement_mode\":\"YCK\",\"is_freight_collect\":null,\"quantity\":null,\"sender_province_no\":null,\"sender_province_name\":null,\"sender_warehouse_id\":null,\"sender_warehouse_name\":null,\"product_type\":\"0\",\"account_book\":null,\"comp_code\":null,\"dept_code\":null,\"comp_name\":null,\"dept_name\":null,\"turned_account_book\":null,\"turned_comp_code\":null,\"turned_dept_code\":null,\"turned_comp_name\":null,\"turned_dept_name\":null,\"biz_product_no\":null,\"biz_product_name\":null,\"last_product_code\":null,\"last_product_name\":null,\"specialty_code\":null,\"specialty_name\":null,\"reserved1\":null,\"reserved2\":null,\"reserved3\":null,\"reserved4\":null,\"reserved5\":null,\"reserved6\":null,\"reserved7\":null,\"reserved8\":null,\"reserved9\":null,\"reserved10\":null,\"reserved11\":1,\"reserved12\":null,\"reserved13\":null,\"reserved14\":\"4\",\"reserved15\":null,\"reserved16\":null,\"reserved17\":null,\"reserved18\":null,\"reserved19\":null,\"reserved20\":null,\"create_date\":\"2025-11-03 11:05:06\",\"create_user\":null,\"update_date\":null,\"update_user\":null,\"is_deleted\":0,\"exception_type\":\"2\",\"exception_memo\":\"金额不一致\",\"status\":null,\"exception_count\":0,\"exception_amount\":5.00,\"is_unified\":null,\"parent_cust_bill_no\":null,\"bill_no_origin\":\"8432347384612\",\"send_bigdata_time\":\"2025-11-03 11:05:10\"},\"table\":\"acm_bill_exception_log\",\"timeVo\":{\"timestamp\":1762139110019,\"nowTime\":\"2025-11-03 11:05:10\"}}").getBytes(StandardCharsets.UTF_8);
+        System.out.println("Message size: " + msgBytes.length + " bytes");
+    }
 
 }

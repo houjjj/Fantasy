@@ -1,4 +1,4 @@
-package com.houjun.rocketmq;
+package com.houjun.rocketmq.typemsg;
 
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.MessageQueueSelector;

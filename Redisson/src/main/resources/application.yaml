@@ -1,10 +1,8 @@
 spring:
-  profiles:
-    active: redisson
-
-management:
-  health:
-    redis:
-      enabled: false
-server:
-  port: 8081
+  redis:
+    redisson:
+      config: |
+        singleServerConfig:
+          address: redis://redis-hbsjzfwzlsb-dev-redis-proxy.hbssjzsfwzlsbxt.svc:7617
+          password: HbsjzsfwzlsbxtDev@redis0929
+          clientName: hj

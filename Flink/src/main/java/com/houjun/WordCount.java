@@ -1,6 +1,8 @@
 package com.houjun;
 
 import org.apache.flink.api.common.functions.FlatMapFunction;
+import org.apache.flink.api.common.restartstrategy.RestartStrategies;
+import org.apache.flink.api.common.time.Time;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -11,7 +13,15 @@ public class WordCount {
         String jarPath = WordCount.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 
         // 1. 创建执行环境
-        final StreamExecutionEnvironment env =  StreamExecutionEnvironment.createRemoteEnvironment("192.168.1.73", 32013, "C:\\Users\\houju\\Documents\\WeChat Files\\wxid_rtcmhuf4zj6621\\FileStorage\\File\\2025-06\\TopSpeedWindowing.jar");
+//        final StreamExecutionEnvironment env =  StreamExecutionEnvironment.createRemoteEnvironment("localhost", 8080, "C:\\Users\\houju\\Documents\\WeChat Files\\wxid_rtcmhuf4zj6621\\FileStorage\\File\\2025-06\\TopSpeedWindowing.jar");
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        env.setRestartStrategy(
+                RestartStrategies.fixedDelayRestart(
+                        100,
+                        Time.seconds(10)
+                )
+        );
+
         // 2. 定义数据源（从集合读取测试数据）
         DataStream<String> text = env.fromElements(
             "Hello Flink",
@@ -26,7 +36,6 @@ public class WordCount {
             .keyBy(value -> value.f0)
 
             .sum(1);
-
 
         // 4. 输出结果（控制台打印）
         counts.print();
