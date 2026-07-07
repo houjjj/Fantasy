@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: proxy
+    active: sjltpt
 management:
   health:
     redis:

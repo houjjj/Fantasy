@@ -18,8 +18,12 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class RedisConfig {
     @Bean
     public RedisTemplate redisTemplate(RedisConnectionFactory factory){
-        RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+        // 将包含了自定义线程池的工厂设置给 Template
         redisTemplate.setConnectionFactory(factory);
+
+
+
         //使用jackson进行序列化
         Jackson2JsonRedisSerializer jsonRedisSerializer =
                 new Jackson2JsonRedisSerializer(Object.class);

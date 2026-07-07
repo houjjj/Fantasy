@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    clickhouse:
+      driver-class-name: com.clickhouse.jdbc.ClickHouseDriver
+      jdbc-url: jdbc:clickhouse://192.168.1.73:30003/default
+      username: admin123
+      password: Admin@456
+      type: com.zaxxer.hikari.HikariDataSource

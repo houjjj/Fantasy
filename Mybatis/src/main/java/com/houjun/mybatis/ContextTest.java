@@ -1,7 +1,9 @@
 package com.houjun.mybatis;
 
-import com.houjun.mybatis.mapper.MenuMapper;
-import org.apache.ibatis.session.*;
+import org.apache.ibatis.session.ResultHandler;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

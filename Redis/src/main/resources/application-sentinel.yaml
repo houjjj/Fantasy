@@ -1,16 +1,18 @@
 spring:
   redis:
     sentinel:
-      master: gis-uat2
-      nodes: "26.8.48.23:30029"
-    password: gisUat@redis0624
+      master: hj-sen940
+      nodes: "192.168.1.73:30009"
+    password: Admin@123
     jedis:
       pool:
         max-active: 200
         max-wait: -1
         max-idle: 10
         min-idle: 0
-
+        test-on-borrow: false
+        test-while-idle: false
+        time-between-eviction-runs: 30s
 
 management:
   health:

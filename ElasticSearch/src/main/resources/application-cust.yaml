@@ -1,0 +1,11 @@
+spring:
+  elasticsearch:
+    uris: http://192.168.1.73:30002 # 替换为你的 ES 地址
+    username: elastic          # 启用安全认证时填写
+    password: Admin@123    # 启用安全认证时填写
+
+es:
+  ip: 192.168.1.73
+  port: 32766
+  username: elastic
+  password: T6CAz93K4gOzb1IO310s27ce

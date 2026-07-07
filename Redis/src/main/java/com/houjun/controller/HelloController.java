@@ -1,22 +1,15 @@
 package com.houjun.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.houjun.config.AsyncTask;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisSentinelConnection;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.util.NumberUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -83,7 +76,6 @@ public class HelloController {
     public void get(int count) throws InterruptedException {
         ValueOperations ops = redisTemplate.opsForValue();
         RedisSentinelConnection sentinelConnection = redisTemplate.getConnectionFactory().getSentinelConnection();
-        System.out.println(JsonUtil.toJson(sentinelConnection));
         RedisConnectionFactory factory = applicationContext.getBean(RedisConnectionFactory.class);
         LettuceConnectionFactory lettuceConnectionFactory = applicationContext.getBean(LettuceConnectionFactory.class);
         System.out.println(lettuceConnectionFactory.getHostName() + ":" + lettuceConnectionFactory.getPort());
@@ -91,7 +83,6 @@ public class HelloController {
         System.out.println(lettuceConnectionFactory.getSentinelConfiguration().getSentinels());
         System.out.println(lettuceConnectionFactory.getSentinelConfiguration().getMaster());
         System.out.println(lettuceConnectionFactory.getSentinelConfiguration());
-        System.out.println(JsonUtil.toJson(lettuceConnectionFactory));
         long start = System.currentTimeMillis();
         log.info("get start {}", start);
         for (int i = 0; i < count; i++) {
@@ -167,8 +158,5 @@ public class HelloController {
         log.info("set end {} ,duration {},", end, (end - start) / 1000);
     }
 
-    public static void main(String[] args) {
-        String value = "强退\",\"dictValue\":\"7\",\"dictType\":\"sys_oper_type\",\"cssClass\":\"\",\"listClass\":\"danger\",\"isDefault\":\"N\",\"status\":\"0\",\"createBy\":\"admin\",\"createTime\":[\"java.sql.Timestamp\",1521171180000],\"updateBy\":\"ry\",\"updateTime\":[\"java.sql.Timestamp\",1521171180000],\"remark\":\"强退操作\",\"default\":false}],[\"com.yuntu.yungis.domain.entity.SysDictData\",{\"searchValue\":null,\"params\":[\"java.util.HashMap\",{}],\"dictCode\":25,\"dictSort\":8,\"dictLabel\":\"生成代码\",\"dictValue\":\"8\",\"dictType\":\"sys_oper_type\",\"cssClass\":\"\",\"listClass\":\"warning\",\"isDefault\":\"N\",\"status\":\"0\",\"createBy\":\"admin\",\"createTime\":[\"java.sql.Timestamp\",1521171180000],\"updateBy\":\"ry\",\"updateTime\":[\"java.sql.Timestamp\",1521171180000],\"remark\":\"生成操作\",\"default\":false}],[\"com.yuntu.yungis.domain.entity.SysDictData\",{\"searchValue\":null,\"params\":[\"java.util.HashMap\",{}],\"dictCode\":26,\"dictSort\":9,\"dictLabel\":\"清空数据\",\"dictValue\":\"9\",\"dictType\":\"sys_oper_type\",\"cssClass\":\"\",\"listClass\":\"danger\",\"isDefault\":\"N\",\"status\":\"0\",\"createBy\":\"admin\",\"createTime\":[\"java.sql.Timestamp\",1521171180000],\"updateBy\":\"ry\",\"updateTime\":[\"java.sql.Timestamp\",1521171180000],\"remark\":\"清空操作\",\"default\":false}]]]";
-        System.out.println(value.getBytes(StandardCharsets.UTF_8).length);
-    }
+
 }

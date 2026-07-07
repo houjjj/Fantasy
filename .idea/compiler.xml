@@ -4,6 +4,7 @@
     <excludeFromCompile>
       <directory url="file://$PROJECT_DIR$/Jedis/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/Druid/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/lettuce/src/main/resources/archetype-resources" includeSubdirectories="true" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
@@ -12,31 +13,35 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="JavaSE" />
-        <module name="JWT" />
+        <module name="openGauss" />
         <module name="eureka" />
         <module name="Kafka" />
-        <module name="Redis" />
         <module name="SpringBoot" />
-        <module name="Quartz" />
         <module name="Flink" />
-        <module name="RocketMQ" />
         <module name="Redisson" />
         <module name="Jedis" />
         <module name="Druid" />
+        <module name="Lettuce" />
         <module name="ElasticSearch" />
         <module name="provider" />
         <module name="JavaBase" />
+        <module name="Stream" />
+        <module name="Postgres" />
+        <module name="JWT" />
+        <module name="Redis" />
+        <module name="Quartz" />
+        <module name="RocketMQ" />
         <module name="Hikari" />
         <module name="Clickhouse" />
-        <module name="Stream" />
         <module name="MongoDB" />
-        <module name="Postgres" />
         <module name="ThreadPool-spring-boot-starterr" />
         <module name="feign" />
         <module name="Mybatis" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
+      <module name="lettuce" target="1.8" />
+      <module name="lettuce (1)" target="1.8" />
       <module name="Log-Demo" target="1.8" />
       <module name="Stream" target="1.8" />
     </bytecodeTargetLevel>

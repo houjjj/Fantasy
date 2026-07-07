@@ -29,6 +29,8 @@
         <module>Flink</module>
         <module>Clickhouse</module>
         <module>Postgres</module>
+        <module>Lettuce</module>
+        <module>openGauss</module>
     </modules>
     <dependencies>
         <dependency>

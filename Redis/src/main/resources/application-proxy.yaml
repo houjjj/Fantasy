@@ -1,8 +1,8 @@
 spring:
   redis:
-    host: 26.8.48.23
-    port: 30045
-    password: gisUat@redis0605
+    host: 192.168.1.73
+    port: 30011
+    password: Admin@123
     lettuce:
       pool:
         max-active: 200

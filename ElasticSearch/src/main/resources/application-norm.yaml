@@ -1,0 +1,8 @@
+#标准用法
+spring:
+  elasticsearch:
+    uris: http://192.168.1.73:30002 # 替换为你的 ES 地址
+    username: elastic          # 启用安全认证时填写
+    password: Admin@123    # 启用安全认证时填写
+    connection-timeout: 5s  #建立 TCP 连接的超时时间（握手阶段）
+    socket-timeout: 5s   #连接建立后，等待 ES 返回数据的超时时间。通常这个需要设得更大（如 3s - 5s），因为大查询或聚合可能耗时较长。

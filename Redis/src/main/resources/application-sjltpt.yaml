@@ -1,0 +1,21 @@
+spring:
+  redis:
+    sentinel:
+      master: sjltpt-prd
+      nodes: 26.8.49.39:30006
+    # Redis服务器连接密码（默认为空）
+    password: SjltptPrd@redis0630
+    jedis:
+      pool:
+        max-active: 200
+        max-wait: -1
+        max-idle: 10
+        min-idle: 0
+        test-on-borrow: false
+        test-while-idle: false
+        time-between-eviction-runs: 30s
+
+management:
+  health:
+    redis:
+      enabled: false

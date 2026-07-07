@@ -12,6 +12,7 @@ import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.acl.common.SessionCredentials;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -20,6 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Component
+@ConditionalOnProperty(name = "rocketmq.url")
 public class RocketMQConsumerRunner {
 
     @Value("${rocketmq.url}")

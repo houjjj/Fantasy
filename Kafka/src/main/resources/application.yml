@@ -1,5 +1,4 @@
 spring:
-  port: 9999
   kafka:
     bootstrap-servers: 192.168.1.73:30003  #bootstrap-servers：连接kafka的地址，多个地址用逗号分隔
     consumer:
@@ -23,11 +22,14 @@ spring:
       security:
         protocol: SASL_PLAINTEXT
       sasl:
-#        mechanism: PLAIN
-        mechanism: SCRAM-SHA-256
+        # SHA-256加密算法
+#        mechanism: SCRAM-SHA-256
+#        jaas:
+#          config: 'org.apache.kafka.common.security.scram.ScramLoginModule required username="lisi" password="Admin@456";'
+#       非加密算法
+        mechanism: PLAIN
         jaas:
-          config: 'org.apache.kafka.common.security.scram.ScramLoginModule required username="lisi" password="Admin@456";'
-#          config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="admin123" password="Admin@456";'
+          config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="admin123" password="Admin@456";'
 
 #spring:
 #  port: 8081

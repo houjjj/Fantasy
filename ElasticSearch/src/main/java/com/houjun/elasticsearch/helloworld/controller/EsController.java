@@ -15,18 +15,22 @@ import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.cluster.metadata.AliasMetadata;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
 @RestController
+@RequestMapping("/v1")
 public class EsController {
 
     @Autowired
     private RestHighLevelClient client;
+
 
     @RequestMapping("/createIndex")
     public Boolean createIndex(String indexName) {

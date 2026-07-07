@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.opengauss.Driver
+    url: jdbc:opengauss://localhost:5432/testdb
+    username: admin123
+    password: Admin@456
+    druid:
+      initial-size: 5
+      max-active: 20
+      validation-query: SELECT 1
+      filters: stat,wall
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

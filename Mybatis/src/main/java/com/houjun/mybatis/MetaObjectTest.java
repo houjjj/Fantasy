@@ -1,7 +1,6 @@
 package com.houjun.mybatis;
 
 import com.houjun.mybatis.domain.Menu;
-import com.houjun.mybatis.mapper.MenuMapper;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;

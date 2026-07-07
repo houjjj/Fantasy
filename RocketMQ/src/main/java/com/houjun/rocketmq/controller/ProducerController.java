@@ -25,6 +25,7 @@ import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,8 +42,9 @@ import java.util.List;
  * @Date: 2023/4/27 - 10:40
  * @Description:
  */
-@RestController
 @Slf4j
+@RestController
+@RequestMapping("/producer/v1") // 加上这个注解来定义类级别的路径前缀
 public class ProducerController {
 
     @Value("${rocketmq.url}")
@@ -60,7 +62,7 @@ public class ProducerController {
     @Autowired
     private RocketmqAdminService rocketmqAdminService;
 
-    @GetMapping("/producer")
+    @GetMapping("/send")
     public String producer(@RequestParam(value = "count", defaultValue = "10") Integer count)
             throws MQClientException, UnsupportedEncodingException, InterruptedException, RemotingException, MQBrokerException {
         DefaultMQProducer producer;
@@ -288,9 +290,6 @@ public class ProducerController {
         }
     }
 
-    public static void main(String[] args) {
-        byte[] msgBytes = JSON.toJSONString("{\"op\":\"c\",\"ts_ms\":1762139106580,\"data\":{\"id\":1985181413591453697,\"line_id\":null,\"cust_bill_no\":\"ACMDZ1437736486185093\",\"bill_flag\":\"1\",\"bill_no\":\"148925623498_86972157440\",\"src_system\":\"YWJD\",\"cust_code\":\"1100173909382\",\"cust_name\":\"井研县佳源农资经营部(柑橘)\",\"party_code\":null,\"cust_sub_code\":null,\"post_org_code\":\"61310701\",\"post_org_name\":\"中国邮政集团有限公司四川省井研县三江邮政所\",\"settle_org_code\":null,\"settle_org_name\":null,\"biz_date\":1759075200000,\"total_amount\":null,\"postage_paid\":5.000000,\"postage_other\":0.000000,\"payment_mode\":null,\"settlement_mode\":\"YCK\",\"is_freight_collect\":null,\"quantity\":null,\"sender_province_no\":null,\"sender_province_name\":null,\"sender_warehouse_id\":null,\"sender_warehouse_name\":null,\"product_type\":\"0\",\"account_book\":null,\"comp_code\":null,\"dept_code\":null,\"comp_name\":null,\"dept_name\":null,\"turned_account_book\":null,\"turned_comp_code\":null,\"turned_dept_code\":null,\"turned_comp_name\":null,\"turned_dept_name\":null,\"biz_product_no\":null,\"biz_product_name\":null,\"last_product_code\":null,\"last_product_name\":null,\"specialty_code\":null,\"specialty_name\":null,\"reserved1\":null,\"reserved2\":null,\"reserved3\":null,\"reserved4\":null,\"reserved5\":null,\"reserved6\":null,\"reserved7\":null,\"reserved8\":null,\"reserved9\":null,\"reserved10\":null,\"reserved11\":1,\"reserved12\":null,\"reserved13\":null,\"reserved14\":\"4\",\"reserved15\":null,\"reserved16\":null,\"reserved17\":null,\"reserved18\":null,\"reserved19\":null,\"reserved20\":null,\"create_date\":\"2025-11-03 11:05:06\",\"create_user\":null,\"update_date\":null,\"update_user\":null,\"is_deleted\":0,\"exception_type\":\"2\",\"exception_memo\":\"金额不一致\",\"status\":null,\"exception_count\":0,\"exception_amount\":5.00,\"is_unified\":null,\"parent_cust_bill_no\":null,\"bill_no_origin\":\"8432347384612\",\"send_bigdata_time\":\"2025-11-03 11:05:10\"},\"table\":\"acm_bill_exception_log\",\"timeVo\":{\"timestamp\":1762139110019,\"nowTime\":\"2025-11-03 11:05:10\"}}").getBytes(StandardCharsets.UTF_8);
-        System.out.println("Message size: " + msgBytes.length + " bytes");
-    }
+
 
 }

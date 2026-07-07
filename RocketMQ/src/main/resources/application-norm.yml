@@ -1,0 +1,20 @@
+rocketmq:
+  name-server: 192.168.1.73:30031
+  producer:
+    access-key: admin123
+    secret-key: Admin@456
+    send-message-timeout: 3000
+    group: producer-group  # 生产者组名
+    sendMessageTimeout: 5000  # 发送消息超时时间，默认3000ms
+    retryTimesWhenSendFailed: 3  # 同步发送失败重试次数
+    retryTimesWhenSendAsyncFailed: 3  # 异步发送失败重试次数
+    maxMessageSize: 4096   # 消息最大长度，默认1024 * 1024 * 4(默认4M)
+    compressMessageBodyThreshold: 4096 # 压缩消息阈值，默认4k(1024 * 4)
+    retryNextServer: false   # 是否在内部发送失败时重试另一个broker，默认false
+  consumer:
+    access-key: admin123
+    secret-key: Admin@456
+    group: consumer-group
+    maxReconsumeTimes: 3  # 最大重试次数
+    pull-batch-size: 10   # 一次拉取消息最大值，注意是拉取消息的最大值而非消费最大值
+

@@ -1,4 +1,4 @@
-package com.houjun;
+package com.houjun.clickhouse;
 
 import com.clickhouse.jdbc.ClickHouseDataSource;
 import com.clickhouse.data.ClickHouseOutputStream;
