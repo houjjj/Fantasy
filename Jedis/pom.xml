@@ -8,22 +8,24 @@
     </parent>
     <artifactId>Jedis</artifactId>
     <name>Jedis</name>
+    <properties>
+        <commons-pool2.version>2.11.1</commons-pool2.version>
+        <jedis.version>3.8.0</jedis.version>
+        <lombok.version>1.18.8</lombok.version>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.6.1</version>
-        </dependency>
+         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>2.6.7</version>
-        </dependency>
+         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
-            <version>2.7.2</version>
             <exclusions>
                 <exclusion>
                     <artifactId>lettuce-core</artifactId>
@@ -34,20 +36,18 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>3.8.0</version>
+            <version>${jedis.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
-            <version>2.11.1</version>
+            <version>${commons-pool2.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.fusesource/sigar -->
         <dependency>
-            <groupId>org.fusesource</groupId>
-            <artifactId>sigar</artifactId>
-            <version>1.6.4</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
         </dependency>
-
     </dependencies>
     <build>
         <finalName>jedis-demo</finalName>

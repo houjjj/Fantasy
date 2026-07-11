@@ -4,7 +4,7 @@
     <excludeFromCompile>
       <directory url="file://$PROJECT_DIR$/Jedis/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/Druid/src/main/resources/archetype-resources" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/lettuce/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/Lettuce/src/main/resources/archetype-resources" includeSubdirectories="true" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
@@ -48,12 +48,27 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Clickhouse" options="-parameters" />
       <module name="Druid" options="-parameters" />
+      <module name="ElasticSearch" options="-parameters" />
       <module name="Hikari" options="-parameters" />
-      <module name="MongoDB" options="" />
-      <module name="Quartz" options="" />
-      <module name="Redisson" options="" />
+      <module name="JWT" options="-parameters" />
+      <module name="JavaSE" options="-parameters" />
+      <module name="Jedis" options="-parameters" />
+      <module name="Kafka" options="-parameters" />
+      <module name="Lettuce" options="-parameters" />
+      <module name="MongoDB" options="-parameters" />
+      <module name="Mybatis" options="-parameters" />
+      <module name="Postgres" options="-parameters" />
+      <module name="Quartz" options="-parameters" />
+      <module name="Redis" options="-parameters" />
+      <module name="Redisson" options="-parameters" />
+      <module name="RocketMQ" options="-parameters" />
+      <module name="SpringBoot" options="-parameters" />
+      <module name="ThreadPool-spring-boot-starterr" options="-parameters" />
+      <module name="fantasy" options="-parameters" />
       <module name="feign" options="-parameters" />
+      <module name="openGauss" options="-parameters" />
       <module name="provider" options="-parameters" />
     </option>
   </component>

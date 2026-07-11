@@ -12,13 +12,13 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
- 
-@Configuration 
 
+@Configuration
 public class RedisConfig extends CachingConfigurerSupport {
     /**
      * lettuce pool springboot2.x.x 获取pool的工具类
      */
+    @Bean
     public GenericObjectPoolConfig getGenericObjectLettucePoolConfig(RedisProperties redisProperties){
         GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();
         genericObjectPoolConfig.setMaxIdle(redisProperties.getJedis().getPool().getMaxIdle());
@@ -49,7 +49,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
- 
+
         // 初始化string的序列化方式
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
         // key采用String的序列化方式
@@ -60,9 +60,9 @@ public class RedisConfig extends CachingConfigurerSupport {
         redisTemplate.setValueSerializer(stringRedisSerializer);
         // hash的value序列化方式采用jackson
         redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
- 
+
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
- 
+
 }

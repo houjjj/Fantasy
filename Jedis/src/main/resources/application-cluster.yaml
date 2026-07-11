@@ -9,9 +9,18 @@ spring:
       pool:
         max-active: 200
         max-wait: -1
-        max-idle: 10
-        min-idle: 0
-        test-bro
+        max-idle: 50
+        min-idle: 20
+
+        custom:
+          test-on-borrow: true   #业务量很大时候建议设置为false，减少一次ping的开销。
+          test-on-return: false  #和test-on-borrow没必要同时开启；业务量很大时候建议设置为false，减少一次ping的开销。
+          test-while-idle: true  #是否在空闲资源监测时通过ping命令监测连接有效性，无效连接将被销毁。
+          ime-between-eviction-run-millis: 30000   #空闲资源的检测周期（单位为毫秒）,默认-1不检测
+          num-tests-per-eviction-run: -1 	# 做空闲资源检测时，每次检测资源的个数。默认值3，-1检测所有，-2检测一半
+          min-evictable-idle-time-millis: -1 # 资源池中资源的最小空闲时间（单位为毫秒），达到此值后空闲资源将被移除
+
+
 
 management:
   health:
