@@ -20,9 +20,10 @@ public class KafkaProducerController {
     private KafkaConsumerService kafkaConsumerService;
 
     @GetMapping("{topic}/send/{msg}")
-    public String sendMessage(@PathVariable("topic") String topic, @PathVariable("msg") String msg) {
+    public String sendMessage(@PathVariable("topic") String topic,
+                              @PathVariable("msg") String msg) {
         int n = 0;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100000; i++) {
             kafkaSender.send(topic, msg + i);
             n++;
         }

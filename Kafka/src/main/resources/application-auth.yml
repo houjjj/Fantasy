@@ -1,0 +1,63 @@
+spring:
+  kafka:
+    bootstrap-servers: 192.168.1.73:30032  #bootstrap-servers：连接kafka的地址，多个地址用逗号分隔
+    consumer:
+      group-id: houjunTestGroup
+      enable-auto-commit: true
+      auto-commit-interval: 100ms
+      max-poll-records: 1  # 一次 poll() 最多返回10000条消息
+      properties:
+        session.timeout.ms: 15000
+        max.partition.fetch.bytes: 10485760 # 每个 Partition 最大10MB
+        max.poll.interval.ms: 300000 # 每5分钟内必须完成一次 poll，否则会触发 Rebalance
+        heartbeat.interval.ms: 3000  # 每秒发送一次心跳
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: earliest #earliest从头消费；latest从尾消费（默认）；none异常
+    jaas:
+      enabled: true
+    producer:
+      retries: 0 #若设置大于0的值，客户端会将发送失败的记录重新发送
+      batch-size: 16384 #当将多个记录被发送到同一个分区时， Producer 将尝试将记录组合到更少的请求中。这有助于提升客户端和服务器端的性能。这个配置控制一个批次的默认大小（以字节为单位）。16384是缺省的配置
+      buffer-memory: 33554432 #Producer 用来缓冲等待被发送到服务器的记录的总字节数，33554432是缺省配置
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer #关键字的序列化类
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer #值的序列化类
+    properties:
+      security:
+        protocol: SASL_PLAINTEXT
+      sasl:
+        # SHA-256加密算法
+#        mechanism: SCRAM-SHA-256
+#        jaas:
+#          config: 'org.apache.kafka.common.security.scram.ScramLoginModule required username="lisi" password="Admin@456";'
+#       非加密算法
+        mechanism: PLAIN
+        jaas:
+          config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="admin123" password="Admin@456";'
+ 
+#spring:
+#  port: 8081
+#  kafka:
+#    consumer:
+#      group-id: myGroup
+#      enable-auto-commit: true
+#      auto-commit-interval: 100ms
+#      properties:
+#        session.timeout.ms: 15000
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      auto-offset-reset: earliest
+##    properties:
+##      security:
+##        protocol: SASL_PLAINTEXT
+##      sasl:
+##        mechanism: PLAIN
+##        jaas:
+##          config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="houjun" password="Admin123";'
+#    jaas:
+#      enabled: true
+#    bootstrap-servers:
+#    - '192.168.12.76:30097'
+#    - '192.168.12.76:30096'
+#    - '192.168.12.76:30095'
+
