@@ -1,12 +1,12 @@
-package com.houjun.rocketmq.service;
+package com.houjun.rocketmq.service.v2;
 
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
-import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 @Service
+@ConditionalOnProperty(name = "rocketmq.name-server")
 public class RocketMQService {
 
     @Autowired

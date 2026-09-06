@@ -39,7 +39,7 @@
               </relocations>
               <transformers>
                 <transformer>
-                  <mainClass>com.houjun.OrderMsgProducer</mainClass>
+                  <mainClass>com.houjun.OrderMsgV2Producer</mainClass>
                 </transformer>
               </transformers>
             </configuration>

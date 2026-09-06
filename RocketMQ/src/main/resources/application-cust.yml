@@ -1,9 +1,9 @@
 rocketmq:
   producerGroup: houjun-producer-test
   consumerGroup: houjun-consumer-test
-  subExpression: *
+  subExpression: "*"
   delayLevel: 3
-  url: 192.168.1.73:30031
-  username: admin123
-  password: Admin@456
+  url: localhost:9876
+  username: ""
+  password: ""
   topic: cctv

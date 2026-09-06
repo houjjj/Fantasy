@@ -1,3 +1,5 @@
 spring:
   profiles:
     active: cust
+server:
+  port: 8082

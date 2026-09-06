@@ -21,14 +21,9 @@ public class HelloController {
     }
 
     @GetMapping("get")
-    public void get() throws Exception {
-
-
-
+    public void get() {
         LocalDateTime now = LocalDateTime.now();
-            System.out.println("时间：" + now + "; key: hello ,value: "+ redisTemplate.boundValueOps("hello").get());
-            Thread.sleep(1000);
-
+        System.out.println("时间：" + now + "; key: hello ,value: " + redisTemplate.boundValueOps("hello").get());
     }
 
 
